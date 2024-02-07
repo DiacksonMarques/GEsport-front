@@ -16,10 +16,13 @@
 
    <div class="surface-overlay py-3 px-6 shadow-2 flex align-items-center justify-content-between relative lg:static">
       <img src="assets/images/logo.png" alt="Image" height="90">
-        <a pstyleclass="@next" enterclass="hidden" leavetoclass="hidden" (click)="menuOpen = !menuOpen" class="p-element cursor-pointer block lg:hidden text-700">
-          <mat-icon  aria-hidden="false" aria-label="fechar" fontIcon="menu"></mat-icon>
+        <a pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
+          (click)="!menuOpen.classList.contains('hidden') ? menuOpen.classList.add('hidden') : menuOpen.classList.remove('hidden')"
+          class="p-element cursor-pointer block lg:hidden text-700"
+        >
+          <mat-icon aria-hidden="false" aria-label="fechar" fontIcon="menu"></mat-icon>
         </a>
-      <div id="menu" [ngClass]="{'hidden':menuOpen}" class="align-items-center flex-grow-1 justify-content-between lg:flex absolute lg:static w-full surface-overlay left-0 top-100 px-6 lg:px-0 z-2 shadow-2 lg:shadow-none">
+      <div id="menu" #menuOpen class="hidden align-items-center flex-grow-1 justify-content-between lg:flex absolute lg:static w-full surface-overlay left-0 top-100 px-6 lg:px-0 z-2 shadow-2 lg:shadow-none">
          <section></section>
          <ul class="list-none p-0 m-0 flex lg:align-items-center text-900 select-none flex-column lg:flex-row cursor-pointer">
             <li><a pripple="" href="#conheca" class="none-text p-ripple p-element flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150"><span>Conheça +</span><span class="p-ink" style="height: 137px; width: 137px; top: -45.5px; left: 16.1875px;"></span></a></li>
@@ -43,7 +46,9 @@
          <div class="text-6xl text-white font-bold mb-1">Bem vindo ao Ace</div>
          <div class="text-6xl text-primary font-bold mb-4">Club de vôlei</div>
          <p class="mt-0 mb-4 line-height-3 text-center mx-auto text-white" style="max-width: 500px;">Nosso clube é o lugar para praticar um dos esportes mais populares do mundo. Dedicamo-nos a promover a cultura do vôlei.</p>
-         <button pbutton="" pripple="" label="Learn More" type="button" class="p-element p-ripple p-button p-component"><span class="p-button-label">Saiba mais +</span><span class="p-ink"></span></button>
+         <button pbutton="" pripple="" label="Learn More" type="button" class="p-element p-ripple p-button p-component">
+          <span class="p-button-label">Inscrição Seletiva +</span>
+         </button>
          <!-- <p class="text-sm mt-4 mb-4 line-height-3 text-white">Saiba mais +</p> -->
          <!-- <div class="flex justify-content-center align-items-center"><a href="https://www.apple.com" class="text-white mr-3"><i class="pi pi-apple text-2xl"></i></a><a href="https://play.google.com" class="text-white mr-3"><i class="pi pi-android text-2xl"></i></a><a href="https://www.facebook.com" class="text-white"><i class="pi pi-facebook text-2xl"></i></a></div> -->
       </div>

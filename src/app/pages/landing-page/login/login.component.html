@@ -1,0 +1,55 @@
+<div class="align-items-center flex justify-content-center lg:px-8 md:px-6 px-4 py-8 surface-ground ng-star-inserted">
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <img src="assets/images/logo.png" alt="Image" height="80" class="mb-3">
+      <div class="text-900 text-3xl font-medium mb-3">Bem vindo!</div>
+    </div>
+    <form [formGroup]="formLogin" (ngSubmit)="submitLogin(formLogin)" class="formgrid grid flex justify-content-center flex-wrap">
+      <mat-form-field class="col-7" appearance="outline">
+        <mat-label>Usuário</mat-label>
+        <input matInput formControlName="username" type="text" placeholder="Digite usuário"/>
+        <mat-icon matSuffix>account_circle</mat-icon>
+        @if(formLogin.controls['username'].errors?.['required']){
+          <mat-error>
+            Por favor, informe um usuário.
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field
+        [ngClass]="{'msg-big': formLogin.controls['password'].errors?.['pattern'] && formLogin.controls['password'].touched}"
+        class="col-7" appearance="outline"
+      >
+        <mat-label>Senha</mat-label>
+        <input matInput
+          formControlName="password"
+          type="password"
+          placeholder="Digite senha"
+          minlength="8"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+        />
+        <mat-icon matSuffix>lock</mat-icon>
+        @if(formLogin.controls['password'].errors?.['required']){
+          <mat-error>Este campo é obrigatório</mat-error>
+        }
+        @if(formLogin.controls['password'].errors?.['pattern']){
+          <mat-error>
+            A senha precisa ter pelo menos um número, uma letra maiúscula
+            e uma minúscula e ter no mínimo 8 caracteres.
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <div class="col-7">
+        <mat-checkbox color="primary" class="example-margin">Lembrar senha</mat-checkbox>
+      </div>
+
+      <div class="col-12 flex justify-content-center">
+        <button type="submit" class="col-7" mat-raised-button color="primary">
+          Entrar
+          <mat-icon matSuffix>login</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

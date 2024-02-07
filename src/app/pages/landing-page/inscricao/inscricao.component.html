@@ -1,0 +1,429 @@
+<p-toast position="bottom-center" key="confirm" (onClose)="onConfirm()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="flex flex-column align-items-start" style="flex: 1">
+          <div class="flex align-items-center gap-2">
+              <p-avatar image="assets/images/logo.png" shape="circle" />
+              <span class="font-bold text-900">ACE Voleibol</span>
+          </div>
+          <div class="">{{ message.summary }}</div>
+          <p-button class="p-button-sm" label="Confirma" (click)="onConfirm()"></p-button>
+      </div>
+  </ng-template>
+</p-toast>
+<div class="grid">
+  <p-confirmDialog class="col-4">
+    <ng-template pTemplate="message" let-message>
+        <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+            <mat-icon class="icon-green">check</mat-icon>
+            <p>{{ message.message }}</p>
+        </div>
+    </ng-template>
+  </p-confirmDialog>
+</div>
+
+<div class="ng-star-inserted">
+  <div class="surface-overlay py-3 px-6 shadow-2 flex align-items-center justify-content-between relative lg:static">
+     <img src="assets/images/logo.png" alt="Image" height="90">
+       <a pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
+        (click)="!menuOpen.classList.contains('hidden') ? menuOpen.classList.add('hidden') : menuOpen.classList.remove('hidden')"
+        class="p-element cursor-pointer block lg:hidden text-700"
+      >
+         <mat-icon aria-hidden="false" aria-label="fechar" fontIcon="menu"></mat-icon>
+       </a>
+     <div id="menu" #menuOpen class="hidden align-items-center flex-grow-1 justify-content-between lg:flex absolute lg:static w-full surface-overlay left-0 top-100 px-6 lg:px-0 z-2 shadow-2 lg:shadow-none">
+        <section></section>
+        <ul class="list-none p-0 m-0 flex lg:align-items-center text-900 select-none flex-column lg:flex-row cursor-pointer">
+           <li><a pripple="" href="#conheca" class="none-text p-ripple p-element flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150"><span>Conheça +</span><span class="p-ink" style="height: 137px; width: 137px; top: -45.5px; left: 16.1875px;"></span></a></li>
+           <li><a pripple="" href="#destaque" class="none-text p-ripple p-element flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150"><span>Destaques</span><span class="p-ink" style="height: 137px; width: 137px; top: -34.5px; left: -41.8906px;"></span></a></li>
+           <li><a pripple="" href="#patrocidaroes" class="none-text p-ripple p-element flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150"><span>Patrocinadores</span><span class="p-ink" style="height: 114px; width: 114px; top: -30px; left: -20.9219px;"></span></a></li>
+           <li><a pripple="" href="#contato" class="none-text p-ripple p-element flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150"><span>Contato</span><span class="p-ink" style="height: 114px; width: 114px; top: -30px; left: -20.9219px;"></span></a></li>
+        </ul>
+        <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+           <button routerLink="login" pbutton="" pripple="" label="Login" class="p-element p-ripple p-button-text font-bold p-button p-component">
+             <span class="p-button-label">Login</span><span class="p-ink"></span>
+           </button>
+         </div>
+     </div>
+  </div>
+
+  <br>
+
+  <div id="conheca" class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+    <div class="mb-3 font-bold text-3xl"><span class="text-900">Seletiva ACE </span><span class="text-blue-600">2024</span></div>
+    <div class="text-700 mb-6">Leia com atenção para não perder nehhum detalhe.</div>
+
+    <mat-tab-group #matGruop [selectedIndex]="indexTab" (selectedIndexChange)="indexTab = $event"
+      class="w-full overflow-hidden" backgroundColor="primary" animationDuration="1000ms"
+    >
+      <mat-tab label="Inscrição" class="">
+        <form class="surface-ground w-full px-4 py-5" [formGroup]="form" (ngSubmit)="onSubmit()">
+          @if(!citys || !schools){
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-6 md:col-4 lg:col-3 col-12">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+              <div class="sm:col-3 md:col-2 lg:col-2 col-6">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+              <div class="sm:col-3 md:col-2 lg:col-2 col-6">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-3 md:col-2 lg:col-2 col-3">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+              <div class="sm:col-5 md:col-3 lg:col-2 col-9">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+              <div class="sm:col-4 md:col-3 lg:col-3 col-12">
+                <p-skeleton height="3rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <p-skeleton height="2rem" styleClass="w-full mb-4"></p-skeleton>
+              </div>
+            </div>
+          } @else if (citys.length && schools.length) {
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Nome</mat-label>
+                  <input matInput formControlName="name" placeholder="Digite o nome completo">
+                  @if(form.controls['name'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Naturalidade</mat-label>
+                  <input type="text"
+                    placeholder="Selecione uma cidade"
+                    aria-label="Cidade"
+                    matInput
+                    formControlName="naturalness"
+                    [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      @for (option of filteredOptionsNaturalness | async; track option) {
+                        <mat-option [value]="option.name">{{option.name}}</mat-option>
+                      }
+                    </mat-autocomplete>
+                    <mat-hint>Cidade onde vôce nasceu</mat-hint>
+                  @if(form.controls['naturalness'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-6 md:col-4 lg:col-3 col-12">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Data nascimento</mat-label>
+                  <input matInput formControlName="birthDate" type="date">
+                  @if(form.controls['birthDate'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="sm:col-3 md:col-2 lg:col-2 col-6">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Altura (cm)</mat-label>
+                  <input matInput type="number" formControlName="height" placeholder="Ex.: 175">
+                  @if(form.controls['height'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="sm:col-3 md:col-2 lg:col-2 col-6">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Peso (kg)</mat-label>
+                  <input matInput type="number" formControlName="weight" placeholder="Ex.: 80">
+                  @if(form.controls['weight'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-3 col-12">
+                <mat-form-field class="w-full"  appearance="outline">
+                  <mat-label>Categoria</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option value="MASCULINO">Masculina</mat-option>
+                    <mat-option value="FEMININO">Feminina</mat-option>
+                  </mat-select>
+                  @if(form.controls['gender'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="sm:col-12 md:col-8 lg:col-4 col-12">
+                <mat-form-field class="w-full"  appearance="outline">
+                  <mat-label>Nível de escolaridade</mat-label>
+                  <mat-select formControlName="educationLevel">
+                    <mat-option [value]="1">Ensino Médio (em andamento)</mat-option>
+                    <mat-option [value]="0">Ensino Médio (concluido)</mat-option>
+                    <mat-option [value]="0">Ensino Superior (em andamento)</mat-option>
+                    <mat-option [value]="0">Ensino Superior (concluido)</mat-option>
+                  </mat-select>
+                  @if(form.controls['educationLevel'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+            @if(form.controls['educationLevel'].value == 1){
+              <div class="grid justify-content-center">
+                <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                  <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Escola</mat-label>
+                    <mat-select formControlName="school_id">
+                      @for (school of schools; track school) {
+                        <mat-option [value]="school.id">{{school.name}}</mat-option>
+                      }
+                    </mat-select>
+                    <mat-hint>Caso sua escola não esteja cadatrada fale no Instagram para cadastrar!</mat-hint>
+                    @if(form.controls['school_id'].errors?.['required']){
+                      <mat-error>Este campo é obrigatório</mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+            }
+
+            <div class="grid justify-content-center">
+              <div class="sm:col-3 md:col-2 lg:col-2 col-3">
+                <mat-form-field
+                  [ngClass]="{'msg-big': form.controls['ddPhone'].errors?.['required'] && form.controls['ddPhone'].touched}"
+                  class="w-full" appearance="outline"
+                >
+                  <mat-label>DDD</mat-label>
+                  <input matInput type="number" formControlName="ddPhone" placeholder="Ex.: 88">
+                  @if(form.controls['ddPhone'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="sm:col-5 md:col-3 lg:col-2 col-9">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Telefone(WhatsApp)</mat-label>
+                  <input matInput type="number" formControlName="numberPhone" placeholder="Ex.: 988785445">
+                  @if(form.controls['numberPhone'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="sm:col-4 md:col-3 lg:col-3 col-12">
+                <mat-form-field class="w-full"  appearance="outline">
+                  <mat-label>Possui titúlo eleitoral</mat-label>
+                  <mat-select formControlName="electoral">
+                    <mat-option [value]="1">Sim</mat-option>
+                    <mat-option [value]="0">Não</mat-option>
+                  </mat-select>
+                  @if(form.controls['electoral'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+
+            @if(form.controls['electoral'].value == 1){
+              <div class="grid justify-content-center">
+                <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                  <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Domicílio eleitora</mat-label>
+                    <input type="text"
+                      [required]="form.controls['electoral'].value == 1"
+                      placeholder="Selecione uma cidade"
+                      aria-label="Cidade"
+                      matInput
+                      formControlName="electoralDomicile"
+                      [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      @for (option of filteredOptionsElectoralDomicile | async; track option) {
+                        <mat-option [value]="option.name">{{option.name}}</mat-option>
+                      }
+                    </mat-autocomplete>
+                    <mat-hint>Cidade onde você vota</mat-hint>
+                    @if(form.controls['electoralDomicile'].errors?.['required']){
+                      <mat-error>Este campo é obrigatório</mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+            }
+
+            <!-- <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <p-fileUpload [showUploadButton]="false"
+                  (onSelect)="onSelectFile($event)" (onClear)="onClearFile($event)" (onRemove)="onRemoveFile($event)"
+                  [multiple]="false" accept="image/*" [maxFileSize]="1000000"
+                >
+                  <ng-template let-file pTemplate="file">
+                    <ul>
+                      <li>
+                        <img [src]="fileBase64" height="60" class="mr-5">
+                        {{ uploadedFile.name }}
+                      </li>
+                    </ul>
+                  </ng-template>
+                </p-fileUpload>
+              </div>
+            </div> -->
+            <div class="grid justify-content-center">
+              <div class="sm:col-12 md:col-8 lg:col-7 col-12">
+                <button-loading
+                  [loading]="loadingSubmitForm"
+                  [type]="'submit'"
+                  [color]="'primary'"
+                  [description]="'Confirma inscrição'"
+                  [iconNext]="'arrow_forward'"
+                  [class]="'w-full'">
+                </button-loading>
+              </div>
+            </div>
+          }
+        </form>
+      </mat-tab>
+      <mat-tab label="Acompanhar inscrição">
+        <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+          <p-messages [(value)]="messages" [enableService]="false"></p-messages>
+          @if(!showInformationEnrollment){
+            <form [formGroup]="formEnrollment" (ngSubmit)="onSubmitEnrollment()" class="grid justify-content-center">
+              <div class="sm:col-12 md:col-6 lg:col-4 col-12">
+                <mat-form-field class="w-full" appearance="outline">
+                  <mat-label>Número incrição</mat-label>
+                  <input matInput formControlName="enrollment" placeholder="Digite o número de inscrição" />
+                  @if(formEnrollment.controls['enrollment'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <div class="sm:col-12 md:col-5 lg:col-4 col-12">
+                <button-loading
+                  [loading]="loadingSubmitForm"
+                  [type]="'submit'"
+                  [color]="'primary'"
+                  [description]="'Pesquisar'"
+                  [iconNext]="'arrow_forward'"
+                  [class]="'w-full p-1-7'">
+                </button-loading>
+              </div>
+            </form>
+          } @else {
+            <div class="grid">
+              <div class="col-12 justify-content-end flex">
+                <button mat-icon-button (click)="closeEnrollment()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <div class="sm:col-12 col-9 justify-content-start">
+                <p-fieldset legend="Atenção" [toggleable]="true">
+                  <ul>
+                    <li class="mb-4">Sera permitida apenas a entrada do atlete e caso seja de menor o seu acompanhante</li>
+                    <li class="mb-4">Chegar 10 minutos antes do começo da seletiva</li>
+                    <li class="mb-4">Está com vestimenta adequada para seletiva</li>
+                    <li class="mb-4">Levar sua garrafa com aguá</li>
+                  </ul>
+                </p-fieldset>
+              </div>
+              <div class="col-12 lg:col-4 p-3">
+                <div class="shadow-2 surface-card p-3" style="border-radius: 12px;">
+                  <div class="flex align-items-center justify-content-between">
+                    <div>
+                      <span class="text-xl text-900 font-bold">{{viewValue.date}} {{viewValue.hour}}</span>
+                      <p class="mt-1 mb-0 text-600 text-xl">Data e hora de início</p>
+                    </div>
+                    <div>
+                      <img height="70" src="assets/svg/41.svg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 lg:col-4 p-3">
+                <div class="shadow-2 surface-card p-3" style="border-radius: 12px;">
+                  <div class="flex align-items-stretch justify-content-between">
+                    <div>
+                      <span class="text-xl text-900 font-bold">Adauto Bezerra(2º Grau)</span>
+                      <p class="mt-1 mb-0 text-600 text-xl">Local</p>
+                    </div>
+                    <div>
+                      <img height="70" src="assets/svg/51.svg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 lg:col-4 p-3">
+                <div class="shadow-2 surface-card p-3" style="border-radius: 12px;">
+                  <div class="flex align-items-center justify-content-between">
+                    <div>
+                      <span class="text-xl text-900 font-bold">{{viewValue.enrollment}}</span>
+                      <p class="mt-1 mb-0 text-600 text-xl">Categoria</p>
+                    </div>
+                    <div>
+                      <img height="70" src="assets/svg/247.svg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+  </div>
+
+  <div class="bg-gray-900 px-4 py-8 md:px-6 lg:px-8">
+    <div class="bg-gray-900">
+       <div class="grid">
+          <div class="col-12 md:col-3 flex flex-wrap justify-content-start md:mb-0 mb-3">
+             <img src="assets/images/logo.png" alt="footer sections" height="150" class="mr-3">
+          </div>
+          <div class="col-12 md:col-3">
+            <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px;">Maria Amélia: Av. Pres. Castelo Branco, sn - Pirajá, Juazeiro do Norte - CE</div>
+            <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px;">Adauto Bezerra(2º Grau): Av. Pres. Castelo Branco - Santa Tereza, Juazeiro do Norte</div>
+            <div class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px;">Quadra Municipal: R. Quinze de Novembro, 130 - São Miguel, Juazeiro do Norte - CE</div>
+          </div>
+          <div class="col-12 md:col-3">
+             <div class="text-white mb-3"><mat-icon aria-hidden="false" aria-label="fechar" fontIcon="call"></mat-icon>(88) 98888-8888</div>
+             <div class="text-white mb-3"><mat-icon aria-hidden="false" aria-label="fechar" fontIcon="alternate_email"></mat-icon>acevoleibol.clube</div>
+          </div>
+          <div class="col-12 md:col-3 text-gray-200">
+             <div class="text-white font-bold line-height-3 mb-3">Mais informaçoes</div>
+             <a class="line-height-3 block cursor-pointer mb-2">Noticias</a>
+             <a class="line-height-3 block cursor-pointer mb-2">GEspost</a>
+             <a class="line-height-3 block cursor-pointer">Mais +</a>
+          </div>
+       </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="flex justify-content-center align-items-center">
+  @if(loading){
+    <div class="absolute">
+      <mat-spinner diameter="24"></mat-spinner>
+    </div>
+  }
+
+  <button [type]="type" class="{{class}}" [color]="color" mat-raised-button [disabled]="loading || disabled">
+    @if(icon){
+      <mat-icon>{{ icon }}</mat-icon>
+    }
+    {{ description }}
+    @if(iconNext){
+      <mat-icon>{{ iconNext }}</mat-icon>
+    }
+  </button>
+</div>

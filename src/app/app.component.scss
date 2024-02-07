@@ -1,0 +1,13 @@
+.icon-emphasis{
+  transform: scale(1.18);
+}
+
+::ng-deep input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+
+}
+::ng-deep input[type=number] {
+ -moz-appearance: textfield !important;
+ appearance: textfield !important;
+
+}
