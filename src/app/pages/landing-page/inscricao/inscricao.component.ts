@@ -147,10 +147,10 @@ export class InscricaoComponent implements OnInit{
             this.viewValue.date = "19/02";
           }
 
-          if(idade <= 14){
+          if(idade <= 14 && birthDate.getFullYear() > 2009){
             this.viewValue.hour = "17:30";
             this.viewValue.enrollment = `Sub 14 ${response.value.gender == "MASCULINO"? "Masculino" : "Feminino"}`;
-          } else if(idade > 14 && idade <= 17){
+          } else if((idade > 14 || birthDate.getFullYear() == 2009) && idade <= 17){
             this.viewValue.hour = "18:30";
             this.viewValue.enrollment = `Sub 17 ${response.value.gender == "MASCULINO"? "Masculino" : "Feminino"}`;
           } else if(idade > 17){

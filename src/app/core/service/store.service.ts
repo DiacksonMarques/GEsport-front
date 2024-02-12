@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { TokenService } from './token.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { City } from '../models/Citys';
 
 @Injectable({
