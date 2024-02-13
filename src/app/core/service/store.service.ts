@@ -45,4 +45,10 @@ export class StoreService {
   public citysAndState(): Observable<City[]>{
     return this.httpClient.get<City[]>(`${this.baseUrl}/citys`);
   }
+
+  public donwLoadTerm(): Observable<Blob>{
+    return this.httpClient.get<Blob>(`${this.baseUrl}/donwloadTerm`,{
+      responseType: 'blob' as 'json'
+    });
+  }
 }

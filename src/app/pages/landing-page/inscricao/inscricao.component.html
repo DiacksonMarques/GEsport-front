@@ -315,7 +315,7 @@
       </mat-tab>
       <mat-tab label="Acompanhar inscrição">
         <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
-          <p-messages [(value)]="messages" [enableService]="false"></p-messages>
+          <!-- <p-messages [(value)]="messages" [enableService]="false"></p-messages> -->
           @if(!showInformationEnrollment){
             <form [formGroup]="formEnrollment" (ngSubmit)="onSubmitEnrollment()" class="grid justify-content-center">
               <div class="sm:col-12 md:col-6 lg:col-4 col-12">
@@ -346,6 +346,26 @@
                   <mat-icon>close</mat-icon>
                 </button>
               </div>
+              @if(downloadTermView){
+                <div class="col-12">
+                  <p-fieldset legend="Importante" [toggleable]="false">
+                    <div class="">
+                      <p>Para os atletas de menores e que não vão estar com seus responsáveis, é obrigatório levar o termo assinado.</p>
+
+                      <button-loading
+                        (click)="donwloadTerm()"
+                        [loading]="loadingSubmitForm"
+                        [type]="'button'"
+                        [color]="'primary'"
+                        [description]="'Download Termo'"
+                        [iconNext]="'download'"
+                        [class]="'p-1-7'">
+                      </button-loading>
+                    </div>
+                  </p-fieldset>
+                </div>
+              }
+
               <div class="sm:col-12 col-9 justify-content-start">
                 <p-fieldset legend="Atenção" [toggleable]="true">
                   <ul>

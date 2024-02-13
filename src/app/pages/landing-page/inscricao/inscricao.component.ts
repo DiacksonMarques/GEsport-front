@@ -31,24 +31,11 @@ import { ToastModule } from 'primeng/toast';
 import { SkeletonModule } from 'primeng/skeleton';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-
 interface View {
   date: string;
   hour: string;
   enrollment: string;
 }
-
-const CUSTDFTS: MatDateFormats = {
-  parse: {
-    dateInput: 'DD/MM/YYYY',
-  },
-  display: {
-    dateA11yLabel: 'LL',
-    monthYearLabel: 'MMMM Y',
-    dateInput: 'DD/MM/YYYY',
-    monthYearA11yLabel: 'MMMM Y',
-  },
-};
 
 @Component({
   selector: 'app-inscricao',
@@ -80,9 +67,7 @@ const CUSTDFTS: MatDateFormats = {
   providers: [
     provideNativeDateAdapter(),
     MessageService,
-    ConfirmationService,
-    { provide: MAT_DATE_FORMATS, useValue: CUSTDFTS },
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+    ConfirmationService
   ],
   templateUrl: './inscricao.component.html',
   styleUrl: './inscricao.component.scss'
@@ -98,6 +83,7 @@ export class InscricaoComponent implements OnInit{
   visible: boolean = false;
   showInformationEnrollment: boolean = false;
   indexTab: number = 0;
+  downloadTermView: boolean = false;
 
   form!: FormGroup;
   formEnrollment!: FormGroup;
@@ -124,7 +110,16 @@ export class InscricaoComponent implements OnInit{
       this.personService.createPersonParcial(this.form.value)
       .subscribe(response => {
         this.dialogConfirm(`Inscrição com o número ${response.matricula} efetuada com sucesso. Acessa a aba de acompanhamento para ter acesso a mais informações.`);
-      }, () => {},
+      },
+      error => {
+        console.log(error.error);
+        if(error.error!.messages){
+          const arrayError: string[] = Object.values(error.error!.messages)
+          this.showConfirm(arrayError.length? arrayError[0] : 'Houve um erro tente novamente!', 'error')
+        }
+
+        this.loadingSubmitForm = false;
+      },
       ()=> {this.loadingSubmitForm = false});
     }
   }
@@ -150,26 +145,51 @@ export class InscricaoComponent implements OnInit{
           if(idade <= 14 && birthDate.getFullYear() > 2009){
             this.viewValue.hour = "17:30";
             this.viewValue.enrollment = `Sub 14 ${response.value.gender == "MASCULINO"? "Masculino" : "Feminino"}`;
+            this.downloadTermView = true;
           } else if((idade > 14 || birthDate.getFullYear() == 2009) && idade <= 17){
             this.viewValue.hour = "18:30";
             this.viewValue.enrollment = `Sub 17 ${response.value.gender == "MASCULINO"? "Masculino" : "Feminino"}`;
+            this.downloadTermView = true;
           } else if(idade > 17){
             this.viewValue.hour = "20:00";
             this.viewValue.enrollment = `Adulto ${response.value.gender == "MASCULINO"? "Masculino" : "Feminino"}`;
+            this.downloadTermView = false;
           }
         } else {
+          this.downloadTermView = false;
           this.messages = [
             { severity: 'error', summary: 'Atenção', detail: 'Inscrição não encontrada' }
           ];
         }
-      }, () => {},
+      }, () => {
+        this.loadingSubmitForm = false;
+        this.downloadTermView = false;
+      },
       ()=> {this.loadingSubmitForm = false});
     }
   }
 
-  showConfirm(messsage: string) {
+  donwloadTerm(): void{
+    this.storeService.donwLoadTerm().subscribe(response => {
+      const file = new Blob([response], {
+        type: response.type
+      });
+
+      const blob = window.URL.createObjectURL(file);
+      const link = document.createElement('a');
+      link.href = blob;
+      link.download = 'TERMO_RESPONSAVEL.pdf';
+
+      link.click();
+
+      window.URL.revokeObjectURL(blob);
+      link.remove();
+    });
+  }
+
+  showConfirm(summary: string, severity = 'success') {
     if (!this.visible) {
-        this.messageService.add({ key: 'confirm', sticky: true, severity: 'success', summary: messsage });
+        this.messageService.add({ key: 'confirm', sticky: true, severity, summary});
         this.visible = true;
     }
   }
@@ -201,7 +221,7 @@ export class InscricaoComponent implements OnInit{
           this.showConfirm(messsage);
         }
     });
-}
+  }
 
   loadPage(): void{
     forkJoin({
