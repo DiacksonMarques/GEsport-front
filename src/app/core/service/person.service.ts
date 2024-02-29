@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Person } from '../models/Person';
 import { ReturnGet } from '../models/ReturnGet';
+import { Athlete } from '../models/Athlete';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class PersonService {
     return this.httpCLient.post<Person>(`${this.urlBase}/personEnrollment`, value);
   }
 
-  getEnrollment(enrollment: string): Observable<ReturnGet<Person>>{
-    return this.httpCLient.get<ReturnGet<Person>>(`${this.urlBase}/personEnrollment/${enrollment}`);
+  getEnrollment(enrollment: string): Observable<ReturnGet<Athlete>>{
+    return this.httpCLient.get<ReturnGet<Athlete>>(`${this.urlBase}/personEnrollment/${enrollment}`);
   }
 }

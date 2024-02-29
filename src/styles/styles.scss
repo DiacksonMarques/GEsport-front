@@ -1,0 +1,32 @@
+//Angular Material
+@use '@angular/material' as mat;
+@import "./theming-color-angular.scss";
+
+@include mat.core();
+
+$gesport-app-primary: mat.define-palette($gesport-primary);
+$gesport-app-accent: mat.define-palette($gesport-accent);
+$gesport-app-warn: mat.define-palette($gesport-warn);
+
+$gesport-theme: mat.define-light-theme((
+  color: (
+    primary: $gesport-app-primary,
+    accent: $gesport-app-accent,
+    warn: $gesport-app-warn,
+  )
+));
+
+@include mat.all-component-themes($gesport-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.color-primary{
+  color: $gesport-primary-color;
+}
+.color-accent{
+  color: $gesport-accent-color;
+}
+.color-warn{
+  color: $gesport-warn-color;
+}

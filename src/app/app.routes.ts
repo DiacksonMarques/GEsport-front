@@ -1,20 +1,17 @@
+import { AthleteRegistrationComponent } from './pages/athlete-registration/athlete-registration.component';
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/landing-page/home/home.component';
-import { Page404Component } from './pages/landing-page/page-404/page-404.component';
-import { LoginComponent } from './pages/landing-page/login/login.component';
-import { AuthGuard, AuthGuardLogin } from './core/auth/auth.guard';
-import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
-import { RolesComponent } from './pages/admin/roles/roles.component';
-import { InscricaoComponent } from './pages/landing-page/inscricao/inscricao.component';
+
+import { AuthGuardLogin } from './core/auth/auth.guard';
+
+import { Page404Component } from './pages/page-404/page-404.component';
+import { LoginComponent } from './pages/login/login.component';
+import { InscricaoComponent } from './pages/inscricao/inscricao.component';
 
 export const routes: Routes = [
-  { path: '' ,component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
   { path: 'inscricao', component: InscricaoComponent, canActivate: [AuthGuardLogin]},
+  { path: 'inscricaoAtleta', component: AthleteRegistrationComponent, canActivate: [AuthGuardLogin]},
 
-  //ADMIN
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
-
+  //404
   { path: '**', component: Page404Component },
 ];

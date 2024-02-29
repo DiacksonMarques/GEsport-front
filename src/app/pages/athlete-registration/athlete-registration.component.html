@@ -1,0 +1,468 @@
+<section class="container-fluid">
+  <div class="row justify-content-center">
+    <p class="fs-3 my-3 text-center">Matrícula atleta</p>
+  </div>
+
+  <form class="w-100 px-4 py-5 placeholder-glow" [formGroup]="formEnrollment" (ngSubmit)="onSubmit()">
+    @if(!citys || !schools){
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12 ">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-12">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2 col-6">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2 col-6">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-3 col-md-2 col-lg-2 col-3">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+        <div class="col-sm-5 col-md-3 col-lg-2 col-9">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-3 col-12">
+          <span height="3rem" class="placeholder w-100 mb-4"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <span height="2rem" class="placeholder w-100 mb-4"></span>
+        </div>
+      </div>
+    } @else if (citys.length && schools.length) {
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" placeholder="Digite o nome completo">
+            @if(formEnrollment.controls['name'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Naturalidade</mat-label>
+            <input type="text"
+              placeholder="Selecione uma cidade"
+              aria-label="Cidade"
+              matInput
+              formControlName="naturalness"
+              [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                @for (option of filteredOptionsNaturalness | async; track option) {
+                  <mat-option [value]="option.name">{{option.name}}</mat-option>
+                }
+              </mat-autocomplete>
+              <mat-hint>Cidade onde vôce nasceu</mat-hint>
+            @if(formEnrollment.controls['naturalness'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Data nascimento</mat-label>
+            <input matInput formControlName="birthDate" type="date">
+            @if(formEnrollment.controls['birthDate'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2 col-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Altura (cm)</mat-label>
+            <input matInput type="text" mask="0*" formControlName="height" placeholder="Ex.: 175">
+            @if(formEnrollment.controls['height'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2 col-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Peso (kg)</mat-label>
+            <input matInput type="text" mask="0*" formControlName="weight" placeholder="Ex.: 80">
+            @if(formEnrollment.controls['weight'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-3 col-12">
+          <mat-form-field class="w-100"  appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="MASCULINO">Masculina</mat-option>
+              <mat-option value="FEMININO">Feminina</mat-option>
+            </mat-select>
+            @if(formEnrollment.controls['gender'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-4 col-12">
+          <mat-form-field class="w-100"  appearance="outline">
+            <mat-label>Nível de escolaridade</mat-label>
+            <mat-select formControlName="educationLevel">
+              <mat-option [value]="1">Ensino Fundamental II (em andamento)</mat-option>
+              <mat-option [value]="1">Ensino Médio (em andamento)</mat-option>
+              <mat-option [value]="0">Ensino Médio (concluido)</mat-option>
+              <mat-option [value]="0">Ensino Superior (em andamento)</mat-option>
+              <mat-option [value]="0">Ensino Superior (concluido)</mat-option>
+            </mat-select>
+            @if(formEnrollment.controls['educationLevel'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      @if(formEnrollment.controls['educationLevel'].value == 1){
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Escola</mat-label>
+              <mat-select formControlName="school_id">
+                @for (school of schools; track school) {
+                  <mat-option [value]="school.id">{{school.name}}</mat-option>
+                }
+              </mat-select>
+              <mat-hint>Caso sua escola não esteja cadatrada fale no Instagram para cadastrar!</mat-hint>
+              @if(formEnrollment.controls['school_id'].errors?.['required']){
+                <mat-error>Este campo é obrigatório</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      }
+
+      <div class="row justify-content-center">
+        <div class="col-sm-3 col-md-2 col-lg-2 col-3">
+          <mat-form-field
+            [ngClass]="{'msg-big': formEnrollment.controls['ddPhone'].errors?.['required'] && formEnrollment.controls['ddPhone'].touched}"
+            class="w-100" appearance="outline"
+          >
+            <mat-label>DDD</mat-label>
+            <input matInput type="text" mask="00" formControlName="ddPhone" placeholder="Ex.: 88">
+            @if(formEnrollment.controls['ddPhone'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-5 col-md-3 col-lg-2 col-9">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Telefone(WhatsApp)</mat-label>
+            <input matInput type="text" mask="0 0000-0000" formControlName="numberPhone" placeholder="Ex.: 988785445">
+            @if(formEnrollment.controls['numberPhone'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-3 col-12">
+          <mat-form-field class="w-100"  appearance="outline">
+            <mat-label>Possui titúlo eleitoral</mat-label>
+            <mat-select formControlName="electoral">
+              <mat-option [value]="1">Sim</mat-option>
+              <mat-option [value]="0">Não</mat-option>
+            </mat-select>
+            @if(formEnrollment.controls['electoral'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      @if(formEnrollment.controls['electoral'].value == 1){
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Domicílio eleitora</mat-label>
+              <input type="text"
+                [required]="formEnrollment.controls['electoral'].value == 1"
+                placeholder="Selecione uma cidade"
+                aria-label="Cidade"
+                matInput
+                formControlName="electoralDomicile"
+                [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                @for (option of filteredOptionsElectoralDomicile | async; track option) {
+                  <mat-option [value]="option.name">{{option.name}}</mat-option>
+                }
+              </mat-autocomplete>
+              <mat-hint>Cidade onde você vota</mat-hint>
+              @if(formEnrollment.controls['electoralDomicile'].errors?.['required']){
+                <mat-error>Este campo é obrigatório</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      }
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-4 col-lg-3 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input type="text"
+              placeholder="Digite o CPF"
+              aria-label="CPF"
+              matInput
+              formControlName="cpf"
+              mask="000.000.000-00">
+            @if(formEnrollment.controls['cpf'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+            @if(formEnrollment.controls['cpf'].errors?.['mask']){
+              <mat-error>O CPF é inválido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-4 col-12">
+          <mat-form-field class="w-100"  appearance="outline">
+            <mat-label>Naipe</mat-label>
+            <mat-select formControlName="category">
+              @for (option of categorys; track option) {
+                <mat-option [value]="option.id">{{option.name}}</mat-option>
+              }
+            </mat-select>
+            @if(formEnrollment.controls['category'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-4 col-md-3 col-lg-3 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>RG</mat-label>
+            <input matInput type="text" mask="0*" formControlName="rg" placeholder="">
+            @if(formEnrollment.controls['rg'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-5 col-md-3 col-lg-2 col-9">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Orgão Emissor</mat-label>
+            <input matInput type="text" mask="UUU*" formControlName="issuingBody" placeholder="">
+            @if(formEnrollment.controls['issuingBody'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2 col-3">
+          <mat-form-field class="w-100"  appearance="outline">
+            <mat-label>UF Emissão</mat-label>
+            <input matInput type="text" mask="UU" formControlName="ufEmitter" placeholder="">
+            @if(formEnrollment.controls['ufEmitter'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+            @if(formEnrollment.controls['ufEmitter'].errors?.['mask']){
+              <mat-error>O UF é inválido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-3 col-lg-3 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>CEP</mat-label>
+            <input matInput type="text" mask="00000-000" formControlName="cep" placeholder="">
+            @if(formEnrollment.controls['cep'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+            @if(formEnrollment.controls['cep'].errors?.['mask']){
+              <mat-error>O CEP é inválido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-4 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Rua</mat-label>
+            <input matInput type="text" formControlName="adress" placeholder="">
+            @if(formEnrollment.controls['adress'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-4 col-lg-3 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Bairro</mat-label>
+            <input matInput type="text" formControlName="neighborhood" placeholder="">
+            @if(formEnrollment.controls['neighborhood'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-12">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Cidade</mat-label>
+            <input type="text"
+              placeholder="Selecione uma cidade"
+              aria-label="Cidade"
+              matInput
+              formControlName="city"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              @for (option of filteredOptionsCity | async; track option) {
+                <mat-option [value]="option.name">{{option.name}}</mat-option>
+              }
+            </mat-autocomplete>
+            @if(formEnrollment.controls['city'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      @if(formResponsible != null){
+        <main [formGroup]="formResponsible">
+          <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-12">
+              <p class="fs-5 my-3 text-center">Dados do Responsável</p>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name" placeholder="Digite o nome completo">
+                @if(formEnrollment.controls['name'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-sm-3 col-md-2 col-lg-2 col-3">
+              <mat-form-field
+                [ngClass]="{'msg-big': formEnrollment.controls['ddPhone'].errors?.['required'] && formEnrollment.controls['ddPhone'].touched}"
+                class="w-100" appearance="outline"
+              >
+                <mat-label>DDD</mat-label>
+                <input matInput type="text" mask="00" formControlName="ddPhone" placeholder="Ex.: 88">
+                @if(formEnrollment.controls['ddPhone'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col-sm-5 col-md-6 col-lg-5 col-9">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Telefone(WhatsApp)</mat-label>
+                <input matInput type="text" mask="0 0000-0000" formControlName="numberPhone" placeholder="Ex.: 988785445">
+                @if(formEnrollment.controls['numberPhone'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-3 col-lg-3 col-12">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>CEP</mat-label>
+                <input matInput type="text" mask="00000-000" formControlName="cep" placeholder="">
+                @if(formEnrollment.controls['cep'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+                @if(formEnrollment.controls['cep'].errors?.['mask']){
+                  <mat-error>O CEP é inválido</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-4 col-12">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Rua</mat-label>
+                <input matInput type="text" formControlName="adress" placeholder="">
+                @if(formEnrollment.controls['adress'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-4 col-lg-3 col-12">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Bairro</mat-label>
+                <input matInput type="text" formControlName="neighborhood" placeholder="">
+                @if(formEnrollment.controls['neighborhood'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-12">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Cidade</mat-label>
+                <input type="text"
+                  placeholder="Selecione uma cidade"
+                  aria-label="Cidade"
+                  matInput
+                  formControlName="city"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  @for (option of filteredOptionsCity | async; track option) {
+                    <mat-option [value]="option.name">{{option.name}}</mat-option>
+                  }
+                </mat-autocomplete>
+                @if(formEnrollment.controls['city'].errors?.['required']){
+                  <mat-error>Este campo é obrigatório</mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
+        </main>
+      }
+
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <button-loading
+            [loading]="loadingSubmitForm"
+            [type]="'submit'"
+            [color]="'primary'"
+            [description]="'Confirma inscrição'"
+            [iconNext]="'arrow_forward'"
+            [class]="'w-100'">
+          </button-loading>
+        </div>
+      </div>
+    }
+  </form>
+</section>

@@ -1,0 +1,59 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid" alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 color-background-login">
+        <div class="d-flex justify-content-center my-3">
+          <img src="assets/images/logo.png" width="90" alt="">
+        </div>
+        <form [formGroup]="formLogin" (ngSubmit)="submitLogin(formLogin)" class="row justify-content-center">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Usuário</mat-label>
+            <input matInput formControlName="username" type="text" placeholder="Digite usuário"/>
+            <mat-icon matSuffix>account_circle</mat-icon>
+            @if(formLogin.controls['username'].errors?.['required']){
+              <mat-error>
+                Por favor, informe um usuário.
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field
+            [ngClass]="{'msg-big': formLogin.controls['password'].errors?.['pattern'] && formLogin.controls['password'].touched}"
+            class="col-10" appearance="outline"
+          >
+            <mat-label>Senha</mat-label>
+            <input matInput
+              formControlName="password"
+              type="password"
+              placeholder="Digite senha"
+              minlength="8"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            />
+            <mat-icon matSuffix>lock</mat-icon>
+            @if(formLogin.controls['password'].errors?.['required']){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+            @if(formLogin.controls['password'].errors?.['pattern']){
+              <mat-error>
+                A senha precisa ter pelo menos um número, uma letra maiúscula
+                e uma minúscula e ter no mínimo 8 caracteres.
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <div class="d-flex justify-content-around align-items-center mb-4">
+            <!-- Checkbox -->
+            <button type="submit" class="col-10 p-4 fs-5" mat-raised-button color="primary">
+              Entrar
+              <mat-icon class="icon-display me-3" matSuffix>login</mat-icon>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

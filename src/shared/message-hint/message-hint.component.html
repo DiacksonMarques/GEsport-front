@@ -1,0 +1,49 @@
+@if(messageGiven && checkView){
+  <div class="p-message"
+    [ngClass]="{
+      'p-message-success': messageGiven.type === 'success',
+      'p-message-error': messageGiven.type === 'error',
+      'p-message-info': messageGiven.type === 'info',
+      'p-message-warning': messageGiven.type === 'warning'
+    }"
+  >
+    <div class="d-flex align-items-center">
+      @if(messageGiven.type === 'success'){
+        <mat-icon class="p-message-icon mx-3">check_circle</mat-icon>
+      }
+      @if(messageGiven.type === 'error'){
+        <mat-icon class="p-message-icon mx-3">report</mat-icon>
+      }
+      @if(messageGiven.type !== 'error' && messageGiven.type != 'success'){
+        <mat-icon class="p-message-icon mx-3">{{ messageGiven.type }}</mat-icon>
+      }
+
+      <span class="fw-bolder">
+        {{ messageGiven.title }}
+        @if(messageGiven.icon && messageGiven.icon.locale == 'title'){
+          <mat-icon>{{messageGiven.icon.type}}</mat-icon>
+        }
+      </span>
+      <span class="mx-2 pre-wrap">
+        {{ messageGiven.subTitle }}
+        <a style="cursor: pointer; text-decoration: underline;" (click)="emitClickLinkChange.emit(true)">
+          {{ messageGiven.subTitleLink }}
+        </a>
+        @if(messageGiven.icon  && messageGiven.icon.locale == 'subTitle'){
+          <mat-icon>{{messageGiven.icon.type}}</mat-icon>
+        }
+        {{ messageGiven.subTitleTwo }}
+      </span>
+      <a style="cursor: pointer; text-decoration: underline;" (click)="emitClickLinkChange.emit(true)">
+        {{messageGiven.textLink}}
+        @if(messageGiven.icon  && messageGiven.icon.locale == 'textLink'){
+          <mat-icon >{{messageGiven.icon.type}}</mat-icon>
+        }
+      </a>
+    </div>
+
+    <button mat-icon-button (click)="checkView = false; checkViewChange.emit(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+}

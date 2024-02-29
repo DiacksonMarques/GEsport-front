@@ -1,15 +1,19 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
-import { TokenService } from './token.service';
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+
 import { environment } from '../../../environments/environment';
+import { TokenService } from './token.service';
+import { MessageRequest } from '../models/message';
 import { City } from '../models/Citys';
+import { MessageComponent } from '../../../shared/message/message.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
-  private urlBase = `${environment.api}`;
 
   // Interfaces
   private isLoggedBS = new BehaviorSubject<boolean>(false);
@@ -21,6 +25,7 @@ export class StoreService {
   constructor(
     private httpClient: HttpClient,
     private tokenService: TokenService,
+    private dialog: MatDialog
   ) {}
 
   // Interfaces
@@ -46,9 +51,11 @@ export class StoreService {
     return this.httpClient.get<City[]>(`${this.baseUrl}/citys`);
   }
 
-  public donwLoadTerm(): Observable<Blob>{
-    return this.httpClient.get<Blob>(`${this.baseUrl}/donwloadTerm`,{
-      responseType: 'blob' as 'json'
-    });
+  showMessage(messageRequest: MessageRequest): Observable<any>{
+    const dialogRef =  this.dialog.open(MessageComponent, {
+      data: messageRequest
+    })
+
+    return dialogRef.afterClosed();
   }
 }
