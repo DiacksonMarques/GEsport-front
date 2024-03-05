@@ -22,5 +22,7 @@ export interface Person{
   responsible_id: number;
   school_id: number;
 
-  matricula: string;
+  educationLevel:  number;
+  electoral: number;
+  responsible: any;
 }

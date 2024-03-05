@@ -9,8 +9,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Form } from '../../core/modules/input.module';
 import { PersonService } from '../../core/service/person.service';
 import { RouterLink } from '@angular/router';
-import { Athlete } from '../../core/models/Athlete';
-import { MessageRequest } from '../../core/models/message';
+import { Athlete } from '../../core/models/Athlete'
 
 
 @Component({
