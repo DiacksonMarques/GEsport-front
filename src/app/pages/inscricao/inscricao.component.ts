@@ -8,8 +8,11 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 import { Form } from '../../core/modules/input.module';
 import { PersonService } from '../../core/service/person.service';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Athlete } from '../../core/models/Athlete'
+import { SelectiveService } from '../../core/service/selective.service';
+import { Candidate } from '../../core/models/Candidate';
+import { TrackRegistrationComponent } from './track-registration/track-registration.component';
 
 
 @Component({
@@ -17,10 +20,11 @@ import { Athlete } from '../../core/models/Athlete'
   standalone: true,
   imports: [
     Form,
-    MatCardModule,
     MatDividerModule,
     RouterLink,
-    NgxMaskDirective
+    NgxMaskDirective,
+
+    TrackRegistrationComponent
   ],
   providers: [
     provideNgxMask()
@@ -30,57 +34,49 @@ import { Athlete } from '../../core/models/Athlete'
 })
 export class InscricaoComponent implements OnInit {
   formEnrollment!: FormGroup;
-  result!: Athlete;
+  result!: Candidate;
 
   loadingSubmitForm: boolean = false;
-  typeResult!: number|null;
   link!: string;
 
+  checkTypeInformation: number|null = null;
+
   constructor(
-    private personService: PersonService,
     private formBuilder: FormBuilder,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private selectiveService: SelectiveService,
+    private route: ActivatedRoute
   ){}
 
-  ngOnInit(): void {;
+  ngOnInit(): void {
     this.loadPage();
+
+    if(this.route.snapshot.params?.['enrollment']){
+      this.formEnrollment.controls['enrollment'].setValue(this.route.snapshot.params['enrollment']);
+      this.onSubmitEnrollment();
+    }
   }
 
   onSubmitEnrollment(){
     if(this.formEnrollment.valid){
       this.loadingSubmitForm = true;
-      this.personService.getEnrollment(this.formEnrollment.controls['enrollment'].value).subscribe(
+      this.selectiveService.getCandidate(this.formEnrollment.controls['enrollment'].value).subscribe(
         response => {
-          if(response.value != null && response.value.enrolment != null){
-            this.typeResult = 0;
+          if(response.value != null &&
+            response.value.enrollment != null &&
+            response.value.result == null
+          ){
+            this.checkTypeInformation = 0;
             this.result = response.value;
-
-            if(this.result.categoryId == 1){
-              this.link = 'https://chat.whatsapp.com/Fh5oGwmRtukDC7DIA0SO9p';
-            }else if(this.result.gender == "MASCULINO"){
-              if(this.result.categoryId == 2){
-                this.link = 'https://chat.whatsapp.com/IogBmc1trJZB2lRmjN0nJ7';
-              } else {
-                this.link = 'https://chat.whatsapp.com/EMAQZh6X7uQ4iJrrQrtO1t';
-              }
-            } else if(this.result.gender == "FEMININO"){
-              if(this.result.categoryId == 2){
-                this.link = 'https://chat.whatsapp.com/GeWTxHPiCu453Aovp194N6';
-              } else {
-                this.link = 'https://chat.whatsapp.com/F7pFeMTuSVFGe7AfBt8AX8';
-              }
-            }
-          } else if(response.value != null && response.value.id != null ){
-            this.typeResult = 1;
-          }
-          else {
+          } else {
             this.storeService.showMessage({
               type: 'warning',
               title: `Inscrição não encontrada`,
               timing: 4000
             });
-          }
 
+            this.checkTypeInformation = null;
+          }
           this.loadingSubmitForm = false;
         },
         () => {
@@ -98,7 +94,7 @@ export class InscricaoComponent implements OnInit {
 
   loadPage(): void{
     this.formEnrollment = this.formBuilder.group({
-      enrollment: [null, [Validators.required, Validators.minLength(7)]],
+      enrollment: [null, [Validators.required, Validators.minLength(6)]],
     })
   }
 }

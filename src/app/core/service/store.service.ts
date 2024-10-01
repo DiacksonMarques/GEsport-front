@@ -6,19 +6,15 @@ import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { TokenService } from './token.service';
-import { MessageRequest } from '../models/message';
 import { City } from '../models/Citys';
 import { MessageComponent } from '../../../shared/message/message.component';
+import { MessageRequest } from '../models/Message';
+import { Role } from '../models/Role';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
-
-  // Interfaces
-  private isLoggedBS = new BehaviorSubject<boolean>(false);
-
-  public isLogged$ = this.isLoggedBS.asObservable();
 
   private baseUrl = `${environment.api}`;
 
@@ -28,23 +24,19 @@ export class StoreService {
     private dialog: MatDialog
   ) {}
 
-  // Interfaces
-  public updateIsLogged(value: boolean): void {
-    this.isLoggedBS.next(value);
-  }
-
   public setToken(token: string): void {
     this.tokenService.setToken(token);
   }
 
   public async isLogged(): Promise<boolean>{
-    if(this.isLoggedBS.value){
+    if(this.tokenService.getIsLogged()){
+      this.tokenService.updateIsLogged(true);
       return new Promise<boolean>(resolve => resolve(true));
     }
     const {token} = await firstValueFrom(this.httpClient.post<{token: boolean}>(`${this.baseUrl}/checkToken`, {token: this.tokenService.getToken()}), { defaultValue: {token: false} });
-    this.updateIsLogged(token);
+    this.tokenService.updateIsLogged(token);
 
-    return token
+    return token;
   }
 
   public citysAndState(): Observable<City[]>{
@@ -57,5 +49,9 @@ export class StoreService {
     })
 
     return dialogRef.afterClosed();
+  }
+
+  showDataMenu(role: string): Observable<Role>{
+    return this.httpClient.get<Role>(`${this.baseUrl}/menus/${role}`);
   }
 }

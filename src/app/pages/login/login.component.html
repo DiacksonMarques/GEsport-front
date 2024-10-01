@@ -46,11 +46,16 @@
           </mat-form-field>
 
           <div class="d-flex justify-content-around align-items-center mb-4">
-            <!-- Checkbox -->
-            <button type="submit" class="col-10 p-4 fs-5" mat-raised-button color="primary">
-              Entrar
-              <mat-icon class="icon-display me-3" matSuffix>login</mat-icon>
-            </button>
+            <div class="col-10">
+              <button-loading
+                [loading]="loadingSubmitForm"
+                [type]="'submit'"
+                [color]="'primary'"
+                [description]="'Entrar'"
+                [iconNext]="'login'"
+                [class]="'p-4 fs-5 w-100'">
+              </button-loading>
+            </div>
           </div>
         </form>
       </div>

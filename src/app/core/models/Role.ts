@@ -1,12 +1,14 @@
 export interface Role{
-  id: string,
-  code: string,
-  name: string,
-  description: string,
-  image: string,
-  price: number,
-  category: string,
-  quantity: number,
-  inventoryStatus: string,
-  rating: number
+  role: string;
+  menus: Menu[];
+}
+
+interface Menu{
+  icon: string;
+  name: string;
+  route: string;
+  children: [{
+    name: string;
+    route: string;
+  }];
 }

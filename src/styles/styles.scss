@@ -18,8 +18,18 @@ $gesport-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($gesport-theme);
 
-html, body { height: 100%; }
+html, body { height: 100%; background-color: rgb(129, 174, 255, 0.1); }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::ng-deep input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+
+}
+::ng-deep input[type=number] {
+ -moz-appearance: textfield !important;
+ appearance: textfield !important;
+
+}
 
 .color-primary{
   color: $gesport-primary-color;

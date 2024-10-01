@@ -1,0 +1,65 @@
+mat-card-header{
+  background-color: #022873;
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+}
+
+mat-card-subtitle{
+  color: #fff;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.description-information{
+  font-weight: 600;
+  color: #484848;
+}
+
+.value-information{
+  font-weight: 700;
+  color: #022873;
+  font-size: 1.9rem;
+  padding: 0.5rem 0;
+  margin: 0;
+}
+
+.value-information-text{
+  font-weight: 700;
+  color: #022873;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  margin: 0;
+}
+
+.icon-information{
+  font-size: 3.2rem !important;
+  width: 3.2rem;
+  height: 3.2rem;
+  color: #022873;
+}
+
+@media (max-width: 1200px) {
+  .value-information{
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .value-information{
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .value-information{
+    font-size: 1.6rem;
+  }
+  .icon-information{
+    font-size:2.9rem !important;
+    width: 2.9rem;
+    height: 2.9rem;
+    color: #022873;
+  }
+}

@@ -3,7 +3,7 @@ import { NgClass } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { MessageRequest } from '../../app/core/models/message';
+import { MessageRequest } from '../../app/core/models/Message';
 
 @Component({
   selector: 'message-hint',

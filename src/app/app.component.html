@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+@if(isLogged){
+  <outlet-menu></outlet-menu>
+} @else if(!isLogged){
+  <router-outlet></router-outlet>
+}

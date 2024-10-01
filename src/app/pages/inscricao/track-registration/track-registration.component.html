@@ -1,0 +1,169 @@
+<div class="row justify-content-center">
+  <div class="col-sm-12 col-md-11 col-lg-8 col-12">
+    <mat-card class="w-100 my3">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          <img src="../../../assets/images/logo.png" width="35" alt="">
+        </div>
+        <mat-card-title>{{ valueCandidate.name }}</mat-card-title>
+        <mat-card-subtitle>Seletiva ACE 2024.2</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content class="my-2">
+        <div class="row my-1">
+          <message-hint
+            [messagem]="messagePayment"
+            [(checkView)]="viewMessagePayment"
+          ></message-hint>
+          @if(!viewMessagePayment && this.valueCandidate.namePix == ""){
+            <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+              <mat-card class="p-1 mt-2 d-flex justify-content-center align-items-center">
+                <img src="{{ valueInformationView.pixQrCode }}" width="150" alt="">
+                <button-loading
+                  [type]="'button'"
+                  [color]="'primary'"
+                  [description]="'Pix Copia e Cola'"
+                  [iconNext]="'content_copy'"
+                  [class]="'w-100 p-2'"
+                  [cdkCopyToClipboard]="valueInformationView.pixCopyPaste"
+                  (click)="messagePixCopyPaste()">
+                </button-loading>
+              </mat-card>
+            </div>
+
+            <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+              <mat-card class="p-1 mt-2">
+                <div class="row">
+                  <div class="col-12">
+                    <span class="description-information">Nome</span>
+                    <h4 class="value-information-text">{{ valueInformationView.pixName }}</h4>
+                  </div>
+
+                  <div class="col-6">
+                    <span class="description-information">Valor</span>
+                    <h4 class="value-information-text">{{ valueInformationView.pixValue }}</h4>
+                  </div>
+                  <div class="col-6">
+                    <span class="description-information">Vencimento</span>
+                    <h4 class="value-information-text">{{ valueInformationView.pixMaturity }}</h4>
+                  </div>
+                  @if(sendNamePixCheck == false){
+                    <div class="col-12">
+                      <button-loading
+                        [type]="'button'"
+                        [color]="'primary'"
+                        [description]="'Já paguei'"
+                        [iconNext]="'monetization_on'"
+                        [class]="'w-100 p-2'"
+                        (click)="sendNamePixCheck = true">
+                      </button-loading>
+                    </div>
+                  } @else if(sendNamePixCheck){
+                    <form [formGroup]="formPayment" (ngSubmit)="onSubmitPayment()" class="row justify-content-center my-3">
+                      <div class="col-12">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>Nome no PIX</mat-label>
+                          <input matInput type="text" formControlName="namePix" placeholder="Digite o nome de quem fez o pagamento" />
+                          <mat-hint>Nome de quem fez o pagamento</mat-hint>
+                          @if(formPayment.controls['namePix'].errors?.['required']){
+                            <mat-error>Este campo é obrigatório</mat-error>
+                          }
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-12">
+                        <button-loading
+                          [loading]="loadingSubmitForm"
+                          [type]="'submit'"
+                          [color]="'primary'"
+                          [description]="'Enivar nome'"
+                          [iconNext]="'send_and_archive'"
+                          [class]="'w-100 p-2'">
+                        </button-loading>
+                      </div>
+                    </form>
+                  }
+                </div>
+              </mat-card>
+            </div>
+          }
+        </div>
+
+        <mat-divider class="my-2"></mat-divider>
+
+        <div class="row">
+          @if(valueInformationView.age < 18){
+            <div class="col-12">
+              <button-loading
+                [type]="'button'"
+                [color]="'primary'"
+                [description]="'Termo de concetimento'"
+                [iconNext]="'description'"
+                [class]="'w-100 p-2'"
+                (click)="downloadTerm()">
+              </button-loading>
+            </div>
+          }
+
+          <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+            <mat-card class="p-1 mt-2">
+              <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                  <mat-icon class="icon-information" fontIcon="assignment"></mat-icon>
+                </div>
+                <div class="col-9">
+                  <span class="description-information">Número inscrição</span>
+                  <h4 class="value-information">{{ valueInformationView.enrollment }}</h4>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+            <mat-card class="p-1 mt-2">
+              <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                  <mat-icon class="icon-information" fontIcon="history_toggle_off"></mat-icon>
+                </div>
+                <div class="col-9">
+                  <span class="description-information">Data da seletiva</span>
+                  <h4 class="value-information">{{ valueInformationView.dateSelective }}</h4>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+            <mat-card class="p-1 mt-2">
+              <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                  <mat-icon class="icon-information" fontIcon="schedule"></mat-icon>
+                </div>
+                <div class="col-9">
+                  <span class="description-information">Horário da seletiva</span>
+                  <h4 class="value-information">{{ valueInformationView.hourSelective }}</h4>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+            <mat-card class="p-1 mt-2">
+              <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                  <mat-icon class="icon-information" fontIcon="room"></mat-icon>
+                </div>
+                <div class="col-9">
+                  <span class="description-information">Local da seletiva</span>
+                  <h4 class="value-information-text">{{ valueInformationView.locationSelective }}</h4>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

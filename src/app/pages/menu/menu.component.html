@@ -1,0 +1,79 @@
+<div #dashboardMenu class='dashboard'>
+  <div #dashboardNav class="dashboard-nav">
+    <header>
+      <a
+        (click)="dashboardNav.classList.contains('mobile-show') ? dashboardNav.classList.remove('mobile-show') : dashboardNav.classList.add('mobile-show')"
+        class="menu-toggle"
+      >
+        <mat-icon class="mat-18">menu</mat-icon>
+      </a>
+      <a [routerLink]="['/dashboard']" class="brand-logo item-menu">
+        <mat-icon class="mat-18">sports_volleyball</mat-icon>
+        <span>ACE VOLEIBOL</span>
+      </a>
+    </header>
+
+    <nav class="dashboard-nav-list">
+      @if(roleMenu){
+        @for (menu of roleMenu.menus; track menu) {
+          @if(menu.children == null){
+            <a [routerLink]="[menu.route]" routerLinkActive="router-link-active"   class="dashboard-nav-item item-menu">
+              <mat-icon class="mat-18">{{menu.icon}}</mat-icon>
+              {{menu.name}}
+            </a>
+          } @else if (menu.children.length) {
+            <div #navDropdown class='dashboard-nav-dropdown'>
+              <a (click)="navDropdown.classList.contains('show') ? navDropdown.classList.remove('show') : navDropdown.classList.add('show')"
+                class="dashboard-nav-item dashboard-nav-dropdown-toggle item-menu"
+              >
+                <mat-icon class="mat-18">{{menu.icon}}</mat-icon>
+                {{menu.name}}
+              </a>
+              <div class='dashboard-nav-dropdown-menu'>
+                @for (menuChildren of menu.children; track menuChildren) {
+                  <a [routerLink]="[menu.route]" class="dashboard-nav-dropdown-item item-menu">{{menuChildren.name}}</a>
+                }
+              </div>
+            </div>
+          }
+        }
+      }
+
+      <div class="nav-item-divider"></div>
+      <a (click)="authService.logout()" class="dashboard-nav-item item-menu">
+        <mat-icon class="mat-18">logout</mat-icon>
+        Logout
+      </a>
+    </nav>
+  </div>
+
+  <div class='dashboard-app'>
+    <header class='dashboard-toolbar'>
+      @if(mobileScreen > 990){
+        <a
+        id="t1"
+        (click)="dashboardMenu.classList.contains('dashboard-compact') ? dashboardMenu.classList.remove('dashboard-compact') : dashboardMenu.classList.add('dashboard-compact')"
+        class="menu-toggle"
+        >
+         <mat-icon class="mat-18">menu</mat-icon>
+        </a>
+      } @else {
+        <a
+        id="t2"
+          (click)="dashboardNav.classList.contains('mobile-show') ? dashboardNav.classList.remove('mobile-show') : dashboardNav.classList.add('mobile-show')"
+          class="menu-toggle"
+        >
+          <mat-icon class="mat-18">menu</mat-icon>
+        </a>
+      }
+
+    </header>
+
+    <div class='dashboard-content'>
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MessageRequest } from '../../app/core/models/message';
+import { MessageRequest } from '../../app/core/models/Message';
 import { MatDividerModule } from '@angular/material/divider';
 
 

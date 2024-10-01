@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { ButtonLoadingComponent } from '../../../shared/button-loading/button-loading.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const Form = [
   FormsModule,
@@ -20,5 +21,6 @@ export const Form = [
   MatAutocompleteModule,
   MatButtonModule,
   ButtonLoadingComponent,
-  MatIconModule
+  MatIconModule,
+  MatCheckboxModule
 ]

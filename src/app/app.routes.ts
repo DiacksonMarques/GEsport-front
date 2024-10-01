@@ -1,18 +1,24 @@
-import { AthleteRegistrationComponent } from './pages/athlete-registration/athlete-registration.component';
+import { AthleteRegistrationComponent } from './pages/dashboard/athlete-registration/athlete-registration.component';
 import { Routes } from '@angular/router';
 
-import { AuthGuardLogin } from './core/auth/auth.guard';
+import { AuthGuard, AuthGuardLogin } from './core/auth/auth.guard';
 
 import { Page404Component } from './pages/page-404/page-404.component';
 import { LoginComponent } from './pages/login/login.component';
 import { InscricaoComponent } from './pages/inscricao/inscricao.component';
-import { AthleteRegistrationUpdateComponent } from './pages/athlete-registration-update/athlete-registration-update.component';
+import { HomeComponent } from './pages/dashboard/home/home.component';
+import { FinancialComponent } from './pages/dashboard/financial/financial.component';
+import { SelectiveRegistrationComponent } from './pages/selective-registration/selective-registration.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
-  { path: 'inscricao', component: InscricaoComponent, canActivate: [AuthGuardLogin]},
-  { path: 'inscricaoAtleta', component: AthleteRegistrationComponent, canActivate: [AuthGuardLogin]},
-  { path: 'alterarAtleta', component: AthleteRegistrationUpdateComponent, canActivate: [AuthGuardLogin]},
+  { path: 'acompanhe', component: InscricaoComponent, canActivate: [AuthGuardLogin]},
+  { path: 'acompanhe/:enrollment', component: InscricaoComponent, canActivate: [AuthGuardLogin]},
+  { path: 'inscricao', component: SelectiveRegistrationComponent, canActivate: [AuthGuardLogin]},
+
+  { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'financial', component: FinancialComponent, canActivate: [AuthGuard]},
+  { path: 'inscricaoAtleta', component: AthleteRegistrationComponent, canActivate: [AuthGuard]},
 
   //404
   { path: '**', component: Page404Component },

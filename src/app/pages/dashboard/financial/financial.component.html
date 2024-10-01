@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+  <mat-card>
+    <mat-card-header>
+        <mat-card-title>
+          <mat-icon class="mat-18">paid</mat-icon>
+          Financeiro
+        </mat-card-title>
+        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="col-11">
+        <table-paginator
+          [tableColumns]="displayedColumnsTableUser"
+          [dataSourceData]="paymentsUsers"
+        ></table-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,59 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { RouterLink } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterLink } from '@angular/router';
 
 import { Observable, forkJoin, map, startWith } from 'rxjs';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
-
-import { Athlete } from '../../core/models/Athlete';
-import { StoreService } from '../../core/service/store.service';
-import { SchoolService } from '../../core/service/school.service';
-import { PersonService } from '../../core/service/person.service';
-import { CategoryService } from '../../core/service/category.service';
-import { City } from '../../core/models/Citys';
-import { School } from '../../core/models/School';
-import { Form } from '../../core/modules/input.module';
-import { Category } from './../../core/models/Category';
+import { StoreService } from '../../../core/service/store.service';
+import { SchoolService } from '../../../core/service/school.service';
+import { PersonService } from '../../../core/service/person.service';
+import { CategoryService } from '../../../core/service/category.service';
+import { City } from '../../../core/models/Citys';
+import { School } from '../../../core/models/School';
+import { Form } from '../../../core/modules/input.module';
+import { Category } from '../../../core/models/Category';
 
 @Component({
-  selector: 'app-athlete-registration-update',
+  selector: 'app-athlete-registration',
   standalone: true,
   imports: [
     Form,
     MatCardModule,
     MatDividerModule,
-    RouterLink,
-    NgxMaskDirective,
-    AsyncPipe,
     NgClass,
+    AsyncPipe,
+    RouterLink,
+    NgxMaskDirective
   ],
   providers: [
     provideNgxMask()
   ],
-  templateUrl: './athlete-registration-update.component.html',
-  styleUrl: './athlete-registration-update.component.scss'
+  templateUrl: './athlete-registration.component.html',
+  styleUrl: './athlete-registration.component.scss'
 })
-export class AthleteRegistrationUpdateComponent implements OnInit {
-
+export class AthleteRegistrationComponent implements OnInit{
   citys!: City[];
   schools: School[] = [] as School[];
   categorys!: Category[];
   filteredOptionsNaturalness!: Observable<City[]>;
   filteredOptionsElectoralDomicile!: Observable<City[]>;
   filteredOptionsCity!: Observable<City[]>;
-  result!: Athlete;
-
-  formEnrollment!: FormGroup;
-  formEnrollmentUpdate!: FormGroup;
-  formResponsible: FormGroup| null = null;
-
 
   loadingSubmitForm: boolean = false;
-  openForm: boolean = false;
+
+  formEnrollment!: FormGroup;
+  formResponsible: FormGroup| null = null;
 
   constructor(
     private storeService: StoreService,
@@ -63,59 +57,20 @@ export class AthleteRegistrationUpdateComponent implements OnInit {
     private categoryService: CategoryService
   ){}
 
-  ngOnInit(): void {;
+  ngOnInit(): void {
     this.loadPage();
   }
 
-  onSubmitEnrollment(){
+  onSubmit(): void {
     if(this.formEnrollment.valid){
-      this.loadingSubmitForm = true;
-      this.personService.getEnrollmentAthelete(this.formEnrollment.controls['enrollment'].value).subscribe(
-        response => {
-          if(response.value == null){
-            this.openForm = false;
-            this.storeService.showMessage({
-              type: 'warning',
-              title: `Usuário não encontrado`,
-              timing: 4000
-            });
-            this.loadingSubmitForm = false;
-            return;
-          }
-
-          response.value.educationLevel = response.value.school_id != null ? 1 : 0;
-          response.value.electoral = response.value.electoralDomicile != null ? 1 : 0;
-          response.value.responsible = null;
-
-          this.formEnrollmentUpdate.patchValue(response.value);
-          this.openForm = true;
-
-          this.loadingSubmitForm = false;
-        },
-        () => {
-          this.storeService.showMessage({
-            type: 'error',
-            title: `Error ao pesquisar, tente novamente!`,
-            timing: 4000
-          });
-
-          this.loadingSubmitForm = false;
-          this.openForm = false;
-        }
-      );
-    }
-  }
-
-  onSubmit(){
-    if(this.formEnrollmentUpdate.valid){
       if(this.formResponsible != null && this.formResponsible.invalid){
         return;
       }
 
-      const value = this.formEnrollmentUpdate.value;
+      const value = this.formEnrollment.value;
       value.responsible = this.formResponsible != null? this.formResponsible.value : null;
 
-      this.personService.updatePersonParcial(value).subscribe(respnse => {
+      this.personService.createPersonParcial(value).subscribe(respnse => {
           this.storeService.showMessage({
             type: 'success',
             title: `Sucesso ao finalizar seu cadastro!`,
@@ -143,34 +98,30 @@ export class AthleteRegistrationUpdateComponent implements OnInit {
       this.categorys = response.categorys;
     },()=>{},
     ()=> {
-      this.filteredOptionsNaturalness = this.formEnrollmentUpdate.controls['naturalness'].valueChanges.pipe(
+      this.filteredOptionsNaturalness = this.formEnrollment.controls['naturalness'].valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value || '')),
       );
 
-      this.filteredOptionsElectoralDomicile = this.formEnrollmentUpdate.controls['electoralDomicile'].valueChanges.pipe(
+      this.filteredOptionsElectoralDomicile = this.formEnrollment.controls['electoralDomicile'].valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value || '')),
       );
 
-      this.filteredOptionsCity = this.formEnrollmentUpdate.controls['city'].valueChanges.pipe(
+      this.filteredOptionsCity = this.formEnrollment.controls['city'].valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value || '')),
       );
     });
 
     this.formEnrollment = this.formBuilder.group({
-      enrollment: [null, [Validators.required, Validators.minLength(7)]],
-    });
-
-    this.formEnrollmentUpdate = this.formBuilder.group({
       id: [null],
       name: [null, [Validators.required, Validators.minLength(5)]],
       naturalness: [null, Validators.required],
-      birthDate: [{value: null, disabled: true}, Validators.required],
+      birthDate: [null, Validators.required],
       height: [null, Validators.required],
       weight: [null, Validators.required],
-      gender: [{value: null, disabled: true}, Validators.required],
+      gender: [null, Validators.required],
       educationLevel: [null, Validators.required],
       school_id: [null],
       ddPhone: [null, [Validators.required, Validators.minLength(2)]],
@@ -178,7 +129,7 @@ export class AthleteRegistrationUpdateComponent implements OnInit {
       electoral: [null, Validators.required],
       electoralDomicile: [null],
       cpf: [null, Validators.required],
-      category: [{value: null, disabled: true}, Validators.required],
+      category: [null, Validators.required],
       rg: [null, Validators.required],
       issuingBody: [null, Validators.required],
       ufEmitter: [null, Validators.required],
@@ -190,7 +141,7 @@ export class AthleteRegistrationUpdateComponent implements OnInit {
     });
     this.addValidator();
 
-    this.formEnrollmentUpdate.controls['birthDate'].valueChanges.subscribe(value => {
+    this.formEnrollment.controls['birthDate'].valueChanges.subscribe(value => {
       if(!value){
         return;
       }
@@ -213,24 +164,24 @@ export class AthleteRegistrationUpdateComponent implements OnInit {
   }
 
   addValidator(): void {
-    this.formEnrollmentUpdate.controls['educationLevel'].valueChanges.subscribe(value => {
+    this.formEnrollment.controls['educationLevel'].valueChanges.subscribe(value => {
       if(value == 1){
-        this.formEnrollmentUpdate.controls['school_id'].addValidators(Validators.required);
+        this.formEnrollment.controls['school_id'].addValidators(Validators.required);
       } else if (value == 0){
-        this.formEnrollmentUpdate.controls['school_id'].removeValidators(Validators.required);
+        this.formEnrollment.controls['school_id'].removeValidators(Validators.required);
       }
 
-      this.formEnrollmentUpdate.controls['school_id'].updateValueAndValidity();
+      this.formEnrollment.controls['school_id'].updateValueAndValidity();
     });
 
-    this.formEnrollmentUpdate.controls['electoral'].valueChanges.subscribe(value => {
+    this.formEnrollment.controls['electoral'].valueChanges.subscribe(value => {
       if(value == 1){
-        this.formEnrollmentUpdate.controls['electoralDomicile'].addValidators(Validators.required);
+        this.formEnrollment.controls['electoralDomicile'].addValidators(Validators.required);
       } else if (value == 0){
-        this.formEnrollmentUpdate.controls['electoralDomicile'].removeValidators(Validators.required);
+        this.formEnrollment.controls['electoralDomicile'].removeValidators(Validators.required);
       }
 
-      this.formEnrollmentUpdate.controls['electoralDomicile'].updateValueAndValidity();
+      this.formEnrollment.controls['electoralDomicile'].updateValueAndValidity();
     });
   }
 

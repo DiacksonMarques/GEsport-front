@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-md-6 col-lg-4 col-12">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Número incrição</mat-label>
-        <input matInput type="text" formControlName="enrollment" mask="000000.0*" [dropSpecialCharacters]="false" placeholder="Digite o número de inscrição" />
+        <input matInput type="text" formControlName="enrollment" placeholder="Digite o número de inscrição" />
         @if(formEnrollment.controls['enrollment'].errors?.['required']){
           <mat-error>Este campo é obrigatório</mat-error>
         }
@@ -25,81 +25,7 @@
     </div>
   </form>
 
-  @if(typeResult == 0){
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-11 col-lg-8 col-12">
-        <mat-card class="w-100">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Resultado da seletiva</mat-card-title>
-            <mat-card-subtitle>Seletiva ACE 2024</mat-card-subtitle>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content class="my-2">
-            <div class="card color-card">
-              <div class="row justify-content-center">
-                <div class="col-12 p-5 d-flex justify-content-center">
-                  <mat-icon class="scale-icon color-primary">verified</mat-icon>
-                </div>
-                <p class="text-center fs-3 color-accent">Parabéns</p>,
-                <p class="text-center fs-2 color-primary">Você foi selecionado para o ACE</p>
-                <p class="text-center fs-4 color-primary">Naipe: {{ result.category }}</p>
-              </div>
-            </div>
-
-            <p class="fs-5 mt-1">Bem vindo a o ACE {{result.name}}</p>
-            <p class="fs-5">Posta no story e marca o clube</p>
-            <p class="fs-4 my-2">Para prosseguir fique atento as instruções:</p>
-            <p class="fs-6 my-2">1º Os treinos começam a partir do dia 04/03;</p>
-            <p class="fs-6 my-2">2º Será solicitado a compra do uniforme após o 2 mês de treino;</p>
-            <p class="fs-6 my-2">3º Será solicitado o valor da mensalidade R$ 30,00 caso não estude em nenhum dos polos de treinamento;</p>
-            <p class="fs-6 my-2">4º O atleta deverá ficar atento ao seu local e horário de treino de forma que cada ausência ou atraso injustificado de forma plausível será punido com a suspensão imediata do treino diário (caso persista por 3 vezes no mesmo mês podendo acarretar na suspensão mensal ou imediata);</p>
-            <p class="fs-6 my-2">5º O atleta tem direito até 3 faltas JUSTIFICADAS no mês (em caso de situações graves de cunho pessoal procurar a coordenação geral do Ace);</p>
-            <p class="fs-6 my-2">6º Será permitido um atraso de até 15 minutos mediante justificativa PLAUSÍVEL;</p>
-            <p class="fs-6 my-2">7º O atleta terá o mês inteiro para realizar o pagamento da mensalidade do clube de forma que a partir do dia 1 de cada mês já será considerada em atraso (qualquer situação pessoal ou dificuldade financeira devem ser relatadas ao prof.Lucas e prof.Karen responsáveis pelo financeiro);</p>
-            <p class="fs-6 my-2">8º No caso do atraso da mensalidade em 2 meses consecutivos e sem resposta ou interesse do atleta de solucionar ou justificar sua situação o atleta será suspenso de suas atividades;</p>
-            <p class="fs-6 my-2">9º No que diz respeito ao uniforme de treino o atleta que já tiver adquirido seu uniforme tem por obrigação que usá-lo em todos os seus dias de treino (uniforme completo: short preto e camisa de treino), em caso de descomprimento dessa regra o atleta será impossibilitado de fazer parte do treino diário;</p>
-            <p class="fs-6 my-2">10º O atleta ao adentrar o local de treino ele deve estar uniformizado cumprindo assim regras estabelecidas pelo ambiente escolar.</p>
-          </mat-card-content>
-          <mat-divider></mat-divider>
-          <mat-card-actions class="row justify-content-center">
-            <p class="fs-5">Para finalizar entre no nosso grupo de WhatsApp</p>
-            <a [href]="link"  class="col-sm-12 col-md-5 col-lg-4 col-12 fs-6" mat-raised-button color="primary">
-              Entrar no grupo
-              <mat-icon class="icon-display me-3" matSuffix>login</mat-icon>
-            </a>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
-  }
-
-  @if(typeResult == 1){
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-11 col-lg-8 col-12">
-        <mat-card class="w-100">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Resultado da seletiva</mat-card-title>
-            <mat-card-subtitle>Seletiva ACE 2024</mat-card-subtitle>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content class="my-2">
-            <div class="card color-card">
-              <div class="row justify-content-center">
-                <div class="col-12 p-5 d-flex justify-content-center">
-                  <mat-icon class="scale-icon color-warn">report_problem</mat-icon>
-                </div>
-                <p class="text-center fs-3 color-accent">Triste notícia</p>,
-                <p class="text-center fs-2 color-warn">Infelizmente você não foi selecionado.</p>
-              </div>
-            </div>
-
-            <p class="fs-4 my-2">Não fique triste haverá outra oportunidade.</p>
-            <p class="fs-4 my-2">É difícil superar quem NUNCA desiste!</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
+  @if(checkTypeInformation == 0){
+    <app-track-registration [valueCandidate]="result"></app-track-registration>
   }
 </section>
