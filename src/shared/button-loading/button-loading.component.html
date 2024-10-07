@@ -9,7 +9,11 @@
     @if(icon){
       <mat-icon>{{ icon }}</mat-icon>
     }
-    {{ description }}
+
+    @if(description){
+      {{ description }}
+    }
+
     @if(iconNext){
       <mat-icon>{{ iconNext }}</mat-icon>
     }

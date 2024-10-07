@@ -8,21 +8,38 @@
           matTooltip="{{ row[column.tableColumn] }}"
         >
           @if(column.mask == "currency"){
+
             {{ row[column.tableColumn] | currency: 'BRL' }}
-          }
 
-          @if(column.mask == "date"){
+          } @else if(column.mask == "date"){
+
             {{ row[column.tableColumn] | date: 'dd/MM/yyyy' }}
-          }
 
-          @if(!column.mask){
+          }@else if(column.mask == "cpf"){
+
+            {{ row[column.tableColumn] | mask: '000.000.000-00' }}
+
+          }@else if(column.button?.description || column.button?.icon){
+
+            <button-loading
+              [loading]="column.button?.loading??false"
+              [type]="'button'"
+              [color]="column.button?.color??'primary'"
+              [description]="column.button?.description??''"
+              [iconNext]="column.button?.icon??''"
+              [disabled]="column.button?.disabled ??false"
+              [class]="'py-2'"
+              (click)="buttonEvent.emit(row)">
+            </button-loading>
+
+          } @else {
             {{ row[column.tableColumn] }}
           }
         </td>
       </ng-container>
     }
 
-    <tr mat-header-row *matHeaderRowDef="columnsHeader"></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsHeader; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsHeader;"></tr>
 
     <!-- Row shown when there is no matching data. -->

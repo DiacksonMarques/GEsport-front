@@ -1,0 +1,24 @@
+.w-30{
+  max-width: 500px;
+}
+
+.header-container{
+  background-color: #022873;
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+
+  .header-title{
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+
+  .header-subTitle{
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.hint-error{
+  font-size: .7rem;
+  color: red;
+}

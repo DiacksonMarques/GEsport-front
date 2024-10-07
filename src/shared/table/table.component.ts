@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -6,6 +6,8 @@ import { getPortuguesePaginatorIntl } from './portuguese-pager-intl';
 import { ColumnsTable } from './Table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { ButtonLoadingComponent } from '../button-loading/button-loading.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'table-paginator',
@@ -16,10 +18,14 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     MatPaginatorModule,
     MatTooltipModule,
     CurrencyPipe,
-    DatePipe
+    DatePipe,
+    ButtonLoadingComponent,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
+    provideNgxMask()
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
@@ -34,6 +40,18 @@ export class TableComponent implements AfterViewInit, OnInit {
       this.dataSourceData = value;
     }
   };
+  @Input('filterTable')
+  set _filterTableDataSourceData(filterValue: string){
+    if(this.dataSource){
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
+  };
+
+  @Output('eventButton') buttonEvent = new EventEmitter<any>();
 
   dataSource!: MatTableDataSource<any>;
   columnsHeader!: string[];

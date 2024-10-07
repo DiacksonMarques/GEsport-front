@@ -20,7 +20,7 @@ export class ButtonLoadingComponent {
   @Input() disabled = false;
   @Input() type = 'button';
   @Input() color = '';
-  @Input() description = 'Click me!';
+  @Input() description!:string;
   @Input() class!: string;
   @Input() icon!: string;
   @Input() iconNext!: string;

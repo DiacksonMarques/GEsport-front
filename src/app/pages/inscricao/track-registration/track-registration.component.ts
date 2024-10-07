@@ -48,6 +48,8 @@ export class TrackRegistrationComponent implements OnInit {
     if(value){
       this.valueCandidate = value;
       this.checkViewInformation();
+      this.viewMessagePayment = false;
+      this.sendNamePixCheck = false;
       this.checkViewMessage();
     }
   }

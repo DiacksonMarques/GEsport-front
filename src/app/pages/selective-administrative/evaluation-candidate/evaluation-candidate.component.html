@@ -1,0 +1,64 @@
+<section class="container">
+  <div class="row justify-content-center py-3">
+    <div class="col-9 col-md-6 col-sm-12">
+      <mat-form-field  class="w-100" appearance="outline">
+        <mat-label>Avaliador</mat-label>
+        <input matInput placeholder="Ex. Mia" [formControl]="inputAppraiser">
+        @if(inputAppraiser.errors?.['required']){
+          <mat-error>Este campo é obrigatório</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-9 col-md-2 col-sm-12 pb-2">
+      @if(!checkButtonAppraiser){
+        <button class="w-100" type="buton" (click)="saveAppraiser()" mat-flat-button color="primary">Salvar</button>
+      } @else if(checkButtonAppraiser){
+        <button class="w-100" type="buton" (click)="deleteAppraiser()" mat-flat-button color="warn">Sair</button>
+      }
+    </div>
+
+    <form [formGroup]="formSearch" class="row justify-content-center">
+      <div class="col-9 col-md-4 col-sm-12">
+        <mat-form-field class="w-100"  appearance="outline">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="MASCULINO">Masculina</mat-option>
+            <mat-option value="FEMININO">Feminina</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-9 col-md-4 col-sm-12">
+        <mat-form-field class="w-100"  appearance="outline">
+          <mat-label>Hora seletiva</mat-label>
+          <mat-select formControlName="hour">
+            <mat-option value="18">18</mat-option>
+            <mat-option value="19">19</mat-option>
+            <mat-option value="20">20</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-9 col-md-8 col-sm-12">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Filtro</mat-label>
+        <input matInput placeholder="Ex. Mia" #input>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 col-md-9 col-sm-12">
+      <table-paginator
+        [tableColumns]="displayedColumns"
+        [dataSourceData]="candidates"
+        [filterTable]="input.value"
+        (eventButton)="openDialog($event)"
+      ></table-paginator>
+    </div>
+  </div>
+</section>
+

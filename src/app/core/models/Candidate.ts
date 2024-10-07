@@ -9,7 +9,7 @@ export interface Candidate{
   numberPhone: number;
   school_id?: number;
   cpf: string;
-  enrollment?: string;
+  enrollment: string;
   namePix?: string;
   approvedPix?: boolean;
   approvedRegistration?: boolean;
