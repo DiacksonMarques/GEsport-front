@@ -15,6 +15,6 @@ export interface Candidate{
   approvedRegistration?: boolean;
   approvedSelective?: boolean;
   levelSelect?: number,
-  result: [];
+  result: any[];
 }
 

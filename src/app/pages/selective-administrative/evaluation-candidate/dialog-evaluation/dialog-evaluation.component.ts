@@ -31,15 +31,22 @@ export class DialogEvaluationComponent {
     private selectiveService: SelectiveService,
   ){
     this.formEvaluation = this.formBuilder.group({
-      headline: [null, [Validators.required]],
-      touch: [null, [Validators.required]],
-      service: [null, [Validators.required]],
-      frontDesk: [null, [Validators.required]],
-      defense: [null, [Validators.required]],
-      attack: [null, [Validators.required]],
-      lock: [null, [Validators.required]],
+      headline: [null],
+      touch: [null],
+      service: [null],
+      frontDesk: [null],
+      defense: [null],
+      attack: [null],
+      lock: [null],
       appraiser: [localStorage.getItem('appraiserStorage')]
     });
+
+    if(this.data.result != null){
+      const index = this.data.result.findIndex(value => value.appraiser == localStorage.getItem('appraiserStorage'));
+      console.log(index);
+
+      this.formEvaluation.patchValue(this.data.result[index]);
+    }
   }
 
   onSubmit(): void{
