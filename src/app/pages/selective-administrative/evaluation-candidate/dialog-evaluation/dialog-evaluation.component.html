@@ -21,145 +21,159 @@
 
 <form [formGroup]="formEvaluation" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          MANCHETE
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="headline">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['headline'].invalid && formEvaluation.controls['headline'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
-      </div>
+    <div>
+      <form [formGroup]="formEvaluationLevel">
+        <mat-form-field class="w-100"  appearance="outline">
+          <mat-label>Nível</mat-label>
+          <mat-select formControlName="level">
+            <mat-option [value]="0">Nível 1</mat-option>
+            <mat-option [value]="1">Nível 2</mat-option>
+            <mat-option [value]="2">Nível 3</mat-option>
+            <mat-option [value]="3">Nível Adulto</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
 
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          TOQUE
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="touch">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['touch'].invalid && formEvaluation.controls['touch'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        MANCHETE
       </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="headline">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['headline'].invalid && formEvaluation.controls['headline'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
 
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          SAQUE
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="service">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['service'].invalid && formEvaluation.controls['service'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        TOQUE
       </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="touch">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['touch'].invalid && formEvaluation.controls['touch'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
 
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          RECEPÇÃO
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="frontDesk">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['frontDesk'].invalid && formEvaluation.controls['frontDesk'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        SAQUE
       </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="service">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['service'].invalid && formEvaluation.controls['service'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
 
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          DEFESA
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="defense">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['defense'].invalid && formEvaluation.controls['defense'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        RECEPÇÃO
       </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="frontDesk">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['frontDesk'].invalid && formEvaluation.controls['frontDesk'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
 
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          ATAQUE
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="attack">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['attack'].invalid && formEvaluation.controls['attack'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        DEFESA
       </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="defense">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['defense'].invalid && formEvaluation.controls['defense'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
 
-      <div>
-        <div class="d-flex justify-content-center p-2">
-          BLOQUEIO
-        </div>
-        <div class="d-flex justify-content-center">
-          <mat-button-toggle-group formControlName="lock">
-            <mat-button-toggle [value]="1">1</mat-button-toggle>
-            <mat-button-toggle [value]="2">2</mat-button-toggle>
-            <mat-button-toggle [value]="3">3</mat-button-toggle>
-            <mat-button-toggle [value]="4">4</mat-button-toggle>
-            <mat-button-toggle [value]="5">5</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-        @if(formEvaluation.controls['lock'].invalid && formEvaluation.controls['lock'].touched){
-          <div class="hint-error d-flex justify-content-center">
-            Campo obrigatório
-          </div>
-        }
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        ATAQUE
       </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="attack">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['attack'].invalid && formEvaluation.controls['attack'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
+
+    <div>
+      <div class="d-flex justify-content-center p-2">
+        BLOQUEIO
+      </div>
+      <div class="d-flex justify-content-center">
+        <mat-button-toggle-group formControlName="lock">
+          <mat-button-toggle [value]="1">1</mat-button-toggle>
+          <mat-button-toggle [value]="2">2</mat-button-toggle>
+          <mat-button-toggle [value]="3">3</mat-button-toggle>
+          <mat-button-toggle [value]="4">4</mat-button-toggle>
+          <mat-button-toggle [value]="5">5</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      @if(formEvaluation.controls['lock'].invalid && formEvaluation.controls['lock'].touched){
+        <div class="hint-error d-flex justify-content-center">
+          Campo obrigatório
+        </div>
+      }
+    </div>
   </mat-dialog-content>
 
   <mat-dialog-actions class="d-flex justify-content-end">

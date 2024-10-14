@@ -22,6 +22,7 @@ import { SelectiveService } from '../../../../core/service/selective.service';
 export class DialogEvaluationComponent {
 
   formEvaluation!: FormGroup;
+  formEvaluationLevel!: FormGroup;
 
   constructor(
     private dialogRef: MatDialogRef<DialogEvaluationComponent>,
@@ -41,21 +42,28 @@ export class DialogEvaluationComponent {
       appraiser: [localStorage.getItem('appraiserStorage')]
     });
 
+    this.formEvaluationLevel = this.formBuilder.group({
+      level: [null, [Validators.required]]
+    })
+
     if(this.data.result != null){
       const index = this.data.result.findIndex(value => value.appraiser == localStorage.getItem('appraiserStorage'));
-      console.log(index);
 
       this.formEvaluation.patchValue(this.data.result[index]);
+      if(this.data.levelSelect){
+        this.formEvaluationLevel.controls['level'].patchValue(this.data.levelSelect);
+      }
     }
   }
 
   onSubmit(): void{
-    if(this.formEvaluation.invalid){
+    if(this.formEvaluation.invalid || this.formEvaluationLevel.invalid){
       this.formEvaluation.markAllAsTouched();
+      this.formEvaluationLevel.markAllAsTouched();
       return;
     }
 
-    this.selectiveService.resultCandidate(this.data.enrollment, this.formEvaluation.value).subscribe(response => {
+    this.selectiveService.resultCandidate(this.data.enrollment, this.formEvaluation.value, this.formEvaluationLevel.value).subscribe(response => {
       if(response.result.length){
         this.dialogRef.close('load');
       }

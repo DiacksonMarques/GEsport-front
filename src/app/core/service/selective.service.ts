@@ -32,8 +32,8 @@ export class SelectiveService {
     return this.httpCLient.put<Candidate>(`${this.urlBase}/putConfirmPresence`, {enrollment});
   }
 
-  resultCandidate(enrollment: string, value: {}): Observable<Candidate>{
-    return this.httpCLient.put<Candidate>(`${this.urlBase}/putResultCanditate`, {enrollment, result: value});
+  resultCandidate(enrollment: string, value: {}, valueLevel: {level: number}): Observable<Candidate>{
+    return this.httpCLient.put<Candidate>(`${this.urlBase}/putResultCanditate`, {enrollment, result: value, level:valueLevel.level});
   }
 
   donwloadTerm() {
