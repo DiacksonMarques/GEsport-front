@@ -15,6 +15,17 @@ export interface Candidate{
   approvedRegistration?: boolean;
   approvedSelective?: boolean;
   levelSelect?: number,
-  result: any[];
+  result: ResultSelective[];
+}
+
+export interface ResultSelective{
+  appraiser: string;
+  attack: number;
+  defense: number;
+  frontDesk: number;
+  headline: number;
+  lock: number;
+  service: number;
+  touch: number;
 }
 

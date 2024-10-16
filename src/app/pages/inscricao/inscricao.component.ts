@@ -13,6 +13,7 @@ import { Athlete } from '../../core/models/Athlete'
 import { SelectiveService } from '../../core/service/selective.service';
 import { Candidate } from '../../core/models/Candidate';
 import { TrackRegistrationComponent } from './track-registration/track-registration.component';
+import { ResultRegistrationComponent } from './result-registration/result-registration.component';
 
 
 @Component({
@@ -24,7 +25,8 @@ import { TrackRegistrationComponent } from './track-registration/track-registrat
     RouterLink,
     NgxMaskDirective,
 
-    TrackRegistrationComponent
+    TrackRegistrationComponent,
+    ResultRegistrationComponent
   ],
   providers: [
     provideNgxMask()
@@ -66,8 +68,14 @@ export class InscricaoComponent implements OnInit {
             response.value.enrollment != null &&
             response.value.result == null
           ){
-            this.checkTypeInformation = 0;
+            this.checkTypeInformation = 1;
             this.result = response.value;
+
+          }  else if(response.value.result != null) {
+
+            this.checkTypeInformation = 1;
+            this.result = response.value;
+
           } else {
             this.storeService.showMessage({
               type: 'warning',

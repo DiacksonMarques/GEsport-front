@@ -27,5 +27,7 @@
 
   @if(checkTypeInformation == 0){
     <app-track-registration [valueCandidate]="result"></app-track-registration>
+  } @else if(checkTypeInformation == 1){
+    <app-result-registration [valueCandidate]="result"></app-result-registration>
   }
 </section>
