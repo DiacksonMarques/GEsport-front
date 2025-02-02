@@ -36,4 +36,4 @@ jobs:
         server-dir: ./public_html/
         dangerous-clean-slate: true
         exclude: |
-        - *.htaccess
+        *.htaccess
