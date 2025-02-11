@@ -6,20 +6,21 @@ import { AuthGuard, AuthGuardLogin } from './core/auth/auth.guard';
 
 import { Page404Component } from './pages/page-404/page-404.component';
 import { LoginComponent } from './pages/login/login.component';
-import { InscricaoComponent } from './pages/inscricao/inscricao.component';
 import { HomeComponent } from './pages/dashboard/home/home.component';
 import { FinancialComponent } from './pages/dashboard/financial/financial.component';
-import { SelectiveRegistrationComponent } from './pages/selective-registration/selective-registration.component';
+import { SelectiveRegistrationComponent } from './pages/selective/selective-registration/selective-registration.component';
 import { DeferCandidateComponent } from './pages/selective-administrative/defer-candidate/defer-candidate.component';
 import { EvaluationCandidateComponent } from './pages/selective-administrative/evaluation-candidate/evaluation-candidate.component';
+import { SelectiveResultComponent } from './pages/selective/selective-result/selective-result.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
-  { path: 'acompanhe', component: InscricaoComponent, canActivate: [AuthGuardLogin]},
-  { path: 'acompanhe/:enrollment', component: InscricaoComponent, canActivate: [AuthGuardLogin]},
-  { path: 'inscricao', component: SelectiveRegistrationComponent, canActivate: [AuthGuardLogin]},
   { path: 'seletiva',
     children: [
+      {path: 'inscricao', component: SelectiveRegistrationComponent},
+      {path: 'acompanhe', component: SelectiveResultComponent},
+      {path: 'acompanhe/:enrollment', component: SelectiveResultComponent},
+
       {path: 'deferir', component: DeferCandidateComponent},
       {path: 'presenca', component: ConfirmPresenceComponent},
       {path: 'avalicao', component: EvaluationCandidateComponent},

@@ -10,8 +10,12 @@ export interface Candidate{
   school_id?: number;
   cpf: string;
   enrollment: string;
-  namePix?: string;
-  approvedPix?: boolean;
+  pixName: string;
+  pixStatus: string;
+  pixMaturity: string;
+  pixValue:string;
+  pixCopyPaste:string;
+  pixQrCode:string;
   approvedRegistration?: boolean;
   approvedSelective?: boolean;
   levelSelect?: number,

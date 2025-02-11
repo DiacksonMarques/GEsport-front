@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../core/service/store.service';
-import { SchoolService } from '../../core/service/school.service';
-import { SelectiveService } from '../../core/service/selective.service';
+import { StoreService } from '../../../core/service/store.service';
+import { SchoolService } from '../../../core/service/school.service';
+import { SelectiveService } from '../../../core/service/selective.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CategoryService } from '../../core/service/category.service';
-import { Form } from '../../core/modules/input.module';
+import { CategoryService } from '../../../core/service/category.service';
+import { Form } from '../../../core/modules/input.module';
 import { NgxMaskDirective } from 'ngx-mask';
-import { City } from '../../core/models/Citys';
-import { School } from '../../core/models/School';
+import { City } from '../../../core/models/Citys';
+import { School } from '../../../core/models/School';
 import { forkJoin, map, Observable, startWith } from 'rxjs';
-import { Category } from '../../core/models/Category';
+import { Category } from '../../../core/models/Category';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -49,6 +49,7 @@ export class SelectiveRegistrationComponent implements OnInit{
 
   onSubmit(): void {
     if(this.formCandidate.valid){
+      /* this.loadingSubmitForm = true; */
       const value = this.formCandidate.value;
 
       this.selectiveService.createCandidate(value).subscribe(response => {
@@ -58,15 +59,11 @@ export class SelectiveRegistrationComponent implements OnInit{
             timing: 7000
           });
 
-          this.router.navigateByUrl(`/acompanhe/${response.enrollment}`);
-        },() => {
-          this.storeService.showMessage({
-            type: 'error',
-            title: `Error ao cadastra, Entre em contato com Await Tech para arrumar!`,
-            timing: 7000
-          });
+          this.router.navigateByUrl(`/seletiva/acompanhe/${response.enrollment}`);
+        }, () => {
+          this.loadingSubmitForm = false;
         }
-      )
+      );
     }
   }
 

@@ -40,7 +40,7 @@ export class DeferCandidateComponent {
     this.displayedColumns[3].button!.loading = true;
     this.selectiveService.deferCandidate(value.enrollment)
     .subscribe(response => {
-      if(response.approvedPix){
+      if(response){
         this.loadPage();
       }
       this.displayedColumns[3].button!.loading = false;

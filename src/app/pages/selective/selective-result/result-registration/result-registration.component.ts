@@ -2,7 +2,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { Candidate, ResultSelective } from '../../../core/models/Candidate';
+import { Candidate, ResultSelective } from '../../../../core/models/Candidate';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 

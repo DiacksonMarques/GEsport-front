@@ -1,23 +1,17 @@
-import { StoreService } from './../../core/service/store.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatCardModule } from '@angular/material/card';
+import { Form } from '../../../core/modules/input.module';
 import { MatDividerModule } from '@angular/material/divider';
-
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-
-import { Form } from '../../core/modules/input.module';
-import { PersonService } from '../../core/service/person.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Athlete } from '../../core/models/Athlete'
-import { SelectiveService } from '../../core/service/selective.service';
-import { Candidate } from '../../core/models/Candidate';
-import { TrackRegistrationComponent } from './track-registration/track-registration.component';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ResultRegistrationComponent } from './result-registration/result-registration.component';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Candidate } from '../../../core/models/Candidate';
+import { SelectiveService } from '../../../core/service/selective.service';
+import { StoreService } from '../../../core/service/store.service';
+import { TrackRegistrationComponent } from './track-registration/track-registration.component';
 
 @Component({
-  selector: 'app-inscricao',
+  selector: 'app-selective-result',
   standalone: true,
   imports: [
     Form,
@@ -31,10 +25,10 @@ import { ResultRegistrationComponent } from './result-registration/result-regist
   providers: [
     provideNgxMask()
   ],
-  templateUrl: './inscricao.component.html',
-  styleUrl: './inscricao.component.scss'
+  templateUrl: './selective-result.component.html',
+  styleUrl: './selective-result.component.scss'
 })
-export class InscricaoComponent implements OnInit {
+export class SelectiveResultComponent implements OnInit {
   formEnrollment!: FormGroup;
   result!: Candidate;
 
@@ -68,12 +62,12 @@ export class InscricaoComponent implements OnInit {
             response.value.enrollment != null &&
             response.value.result == null
           ){
-            this.checkTypeInformation = 1;
+            this.checkTypeInformation = 0;
             this.result = response.value;
 
           }  else if(response.value.result != null) {
 
-            this.checkTypeInformation = 1;
+            this.checkTypeInformation = 0;
             this.result = response.value;
 
           } else {
