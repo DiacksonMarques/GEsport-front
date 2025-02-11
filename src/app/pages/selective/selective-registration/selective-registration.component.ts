@@ -49,7 +49,7 @@ export class SelectiveRegistrationComponent implements OnInit{
 
   onSubmit(): void {
     if(this.formCandidate.valid){
-      /* this.loadingSubmitForm = true; */
+      this.loadingSubmitForm = true;
       const value = this.formCandidate.value;
 
       this.selectiveService.createCandidate(value).subscribe(response => {
