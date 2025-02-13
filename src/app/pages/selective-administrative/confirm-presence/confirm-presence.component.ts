@@ -47,7 +47,7 @@ export class ConfirmPresenceComponent {
   }
 
   loadPage(): void{
-    this.selectiveService.getCandidateDefer().subscribe(response => {
+    this.selectiveService.getCandidatePayment().subscribe(response => {
       this.candidates = response;
     });
   }

@@ -19,8 +19,7 @@ import { Router } from '@angular/router';
   imports: [
     Form,
     NgxMaskDirective,
-    NgClass,
-    AsyncPipe
+    NgClass
   ],
   templateUrl: './selective-registration.component.html',
   styleUrl: './selective-registration.component.scss'

@@ -9,7 +9,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/dashboard/home/home.component';
 import { FinancialComponent } from './pages/dashboard/financial/financial.component';
 import { SelectiveRegistrationComponent } from './pages/selective/selective-registration/selective-registration.component';
-import { DeferCandidateComponent } from './pages/selective-administrative/defer-candidate/defer-candidate.component';
 import { EvaluationCandidateComponent } from './pages/selective-administrative/evaluation-candidate/evaluation-candidate.component';
 import { SelectiveResultComponent } from './pages/selective/selective-result/selective-result.component';
 
@@ -21,7 +20,6 @@ export const routes: Routes = [
       {path: 'acompanhe', component: SelectiveResultComponent},
       {path: 'acompanhe/:enrollment', component: SelectiveResultComponent},
 
-      {path: 'deferir', component: DeferCandidateComponent},
       {path: 'presenca', component: ConfirmPresenceComponent},
       {path: 'avalicao', component: EvaluationCandidateComponent},
     ],

@@ -24,10 +24,6 @@ export class SelectiveService {
     return this.httpCLient.put<Candidate>(`${this.urlBase}/putPixName`, {enrollment, name});
   }
 
-  deferCandidate(enrollment: string): Observable<Candidate>{
-    return this.httpCLient.put<Candidate>(`${this.urlBase}/putDeferCanditate`, {enrollment});
-  }
-
   confirmPresence(enrollment: string): Observable<Candidate>{
     return this.httpCLient.put<Candidate>(`${this.urlBase}/putConfirmPresence`, {enrollment});
   }
@@ -46,12 +42,8 @@ export class SelectiveService {
     return this.httpCLient.get<ReturnGet<Candidate>>(`${this.urlBase}/candidate/${enrollment}`);
   }
 
-  getCandidateNotDefer(): Observable<Candidate[]>{
-    return this.httpCLient.get<Candidate[]>(`${this.urlBase}/candidatesNotDefer`);
-  }
-
-  getCandidateDefer(): Observable<Candidate[]>{
-    return this.httpCLient.get<Candidate[]>(`${this.urlBase}/candidateDefer`);
+  getCandidatePayment(): Observable<Candidate[]>{
+    return this.httpCLient.get<Candidate[]>(`${this.urlBase}/candidatePayment`);
   }
 
   getCandidateForEvaluation(hour: string, gender: string): Observable<Candidate[]>{
