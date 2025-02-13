@@ -7,7 +7,8 @@ import { ColumnsTable } from './Table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ButtonLoadingComponent } from '../button-loading/button-loading.component';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import  {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'table-paginator',
@@ -20,8 +21,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     CurrencyPipe,
     DatePipe,
     ButtonLoadingComponent,
-    NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
@@ -50,6 +51,7 @@ export class TableComponent implements AfterViewInit, OnInit {
       }
     }
   };
+  @Input() spinnerLoader = false;
 
   @Output('eventButton') buttonEvent = new EventEmitter<any>();
 

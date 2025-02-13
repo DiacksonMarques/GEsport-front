@@ -24,6 +24,7 @@ export class ConfirmPresenceComponent {
     { columnName: 'Confirma', tableColumn: 'button', button: {loading: false, icon: 'send', description: 'Presença'}}
   ] as ColumnsTable[];
   candidates!: Candidate[];
+  loadingCandidates = false
 
   constructor(
     private selectiveService: SelectiveService
@@ -47,8 +48,10 @@ export class ConfirmPresenceComponent {
   }
 
   loadPage(): void{
+    this.loadingCandidates = true;
     this.selectiveService.getCandidatePayment().subscribe(response => {
       this.candidates = response;
-    });
+      this.loadingCandidates = false;
+    },()=> this.loadingCandidates=false);
   }
 }

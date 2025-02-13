@@ -14,6 +14,7 @@
         [tableColumns]="displayedColumns"
         [dataSourceData]="candidates"
         [filterTable]="input.value"
+        [spinnerLoader]="loadingCandidates"
         (eventButton)="confirmCandidate($event)"
       ></table-paginator>
     </div>
