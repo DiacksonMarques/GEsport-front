@@ -38,6 +38,7 @@ export class ConfirmPresenceComponent {
     this.selectiveService.confirmPresence(value.enrollment)
     .subscribe(response => {
       if(response.approvedRegistration){
+        this.candidates = [];
         this.loadPage();
       }
 
@@ -48,6 +49,8 @@ export class ConfirmPresenceComponent {
   }
 
   loadPage(): void{
+    console.log('passei');
+
     this.loadingCandidates = true;
     this.selectiveService.getCandidatePayment().subscribe(response => {
       this.candidates = response;
