@@ -39,6 +39,9 @@
     } @else if (schools.length) {
       <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8 col-lg-7 col-12">
+          <h1>Seletiva Encerrada, aguarde a abertura de uma nova seletiva</h1>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-7 col-12">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name" placeholder="Digite o nome completo">
@@ -174,6 +177,7 @@
             [loading]="loadingSubmitForm"
             [type]="'submit'"
             [color]="'primary'"
+            [disabled]="true"
             [description]="'Confirma inscrição'"
             [iconNext]="'arrow_forward'"
             [class]="'w-100'">
