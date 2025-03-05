@@ -105,7 +105,7 @@
       </mat-card>
     </div>
   </div>
-} @else if(valueCandidate.levelSelect == null) {
+} @else if(valueCandidate.levelSelect == null && valueCandidate.gender == 'MASCULINO') {
   <div class="row justify-content-center">
     <div class="col-sm-12 col-md-11 col-lg-8 col-12">
       <mat-card class="w-100">
@@ -133,6 +133,35 @@
 
           <p class="fs-4 my-2">Não fique triste haverá outra oportunidade.</p>
           <p class="fs-4 my-2">É difícil superar quem NUNCA desiste!</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+} @else if(valueCandidate.levelSelect == null && valueCandidate.gender == 'FEMININO') {
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-11 col-lg-8 col-12">
+      <mat-card class="w-100">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            <img src="../../../assets/images/logo.png" width="35" alt="">
+          </div>
+          <mat-card-title>Resultado da seletiva</mat-card-title>
+          <mat-card-subtitle>Seletiva ACE 2025</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="my-2">
+          <div class="card color-card">
+            <div class="row justify-content-center">
+              <div class="col-12 p-5 d-flex justify-content-center">
+                <mat-icon class="scale-icon color-warn">report_problem</mat-icon>
+              </div>
+              <p class="text-center fs-3 color-accent">Resultado ainda não divulgado</p>
+              ,
+              <p class="text-center fs-2 color-warn">
+                Aguardem novidades!
+              </p>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
