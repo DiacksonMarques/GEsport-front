@@ -38,18 +38,29 @@ export class ResultRegistrationComponent {
     if(this.valueCandidate.levelSelect != null){
       switch(this.valueCandidate.levelSelect){
         case 1:{
-          this.link.push({link: 'https://chat.whatsapp.com/DLXIREma4ErGCEnedMHbrF', title: 'Entrar no grupo María Amélia'});
-          this.link.push({link: 'https://chat.whatsapp.com/JToQWep2tqaAOb5K0YWaNu', title: 'Entrar no grupo Adauto Bezerra'});
+          if(this.valueCandidate.gender == "FEMININO"){
+            this.link.push({link: 'https://chat.whatsapp.com/HPF8U0tpTBr1wkdHkjChII', title: 'Entrar no grupo'});
+          } else if(this.valueCandidate.gender == "MASCULINO"){
+            this.link.push({link: 'https://chat.whatsapp.com/DLXIREma4ErGCEnedMHbrF', title: 'Entrar no grupo'});
+          }
           break;
         }
 
         case 2:{
-          this.link.push({link: 'https://chat.whatsapp.com/I6lkzcykULGGvz2tkTxTtQ', title: 'Entrar no grupo'});
+          if(this.valueCandidate.gender == "FEMININO"){
+            this.link.push({link: 'https://chat.whatsapp.com/KP1OobkK9rWGVFJqrLkLDe', title: 'Entrar no grupo'});
+          } else if(this.valueCandidate.gender == "MASCULINO"){
+            this.link.push({link: 'https://chat.whatsapp.com/I6lkzcykULGGvz2tkTxTtQ', title: 'Entrar no grupo'});
+          }
           break;
         }
 
         case 3:{
-          this.link.push({link: 'https://chat.whatsapp.com/IJPxqKwkkOiGulQ8ASkmSN', title: 'Entrar no grupo'});
+          if(this.valueCandidate.gender == "FEMININO"){
+            this.link.push({link: 'https://chat.whatsapp.com/KP1OobkK9rWGVFJqrLkLDe', title: 'Entrar no grupo'});
+          } else if(this.valueCandidate.gender == "MASCULINO"){
+            this.link.push({link: 'https://chat.whatsapp.com/IJPxqKwkkOiGulQ8ASkmSN', title: 'Entrar no grupo'});
+          }
           break;
         }
 

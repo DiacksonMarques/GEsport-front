@@ -1,4 +1,4 @@
-@if(valueCandidate.levelSelect != null && valueCandidate.gender == 'MASCULINO'){
+@if(valueCandidate.levelSelect != null){
   <div class="row justify-content-center">
     <div class="col-sm-12 col-md-11 col-lg-8 col-12">
       <mat-card class="w-100">
@@ -105,7 +105,7 @@
       </mat-card>
     </div>
   </div>
-} @else if(valueCandidate.levelSelect == null && valueCandidate.gender == 'MASCULINO') {
+} @else if(valueCandidate.levelSelect == null) {
   <div class="row justify-content-center">
     <div class="col-sm-12 col-md-11 col-lg-8 col-12">
       <mat-card class="w-100">
@@ -137,7 +137,7 @@
       </mat-card>
     </div>
   </div>
-} @else if(valueCandidate.levelSelect == null && valueCandidate.gender == 'FEMININO') {
+} <!-- @else if(valueCandidate.levelSelect == null && valueCandidate.gender == 'FEMININO') {
   <div class="row justify-content-center">
     <div class="col-sm-12 col-md-11 col-lg-8 col-12">
       <mat-card class="w-100">
@@ -166,4 +166,4 @@
       </mat-card>
     </div>
   </div>
-}
+} -->
