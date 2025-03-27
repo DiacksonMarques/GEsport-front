@@ -1,0 +1,34 @@
+.example-stepper {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.products{
+  height: auto !important;
+
+  .title{
+    font-size: small;
+    font-weight: 600;
+  }
+
+  .sub-title-container{
+    width: 100%;
+  }
+  .sub-title{
+    white-space: normal;
+    font-size: x-small;
+    font-weight: 500;
+  }
+}
+
+.container-price{
+  background-color: #d6d6d6;
+
+  .price{
+    font-size: small;
+    font-weight: 700;
+  }
+}

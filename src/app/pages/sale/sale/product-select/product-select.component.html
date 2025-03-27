@@ -1,0 +1,89 @@
+<div class="w-100 p-2 d-flex justify-content-between align-items-center">
+  <h2 class="m-0">Faça seu pedido</h2>
+
+  <button mat-flat-button color="primary" mat-dialog-close>Sair</button>
+</div>
+<mat-dialog-content class="container-fluid">
+  <form class="">
+    <mat-form-field class="w-100 pt-1"  appearance="outline">
+      <mat-label>Produto</mat-label>
+      <mat-select [formControl]="productControl">
+        @for (product of data.products; track product.description; let idx = $index ) {
+          <mat-option [value]="idx">{{product.description}}</mat-option>
+        }
+      </mat-select>
+      <!-- @if(fromSale.controls['product'].errors?.['required']){
+        <mat-error>Este campo é obrigatório</mat-error>
+      } -->
+    </mat-form-field>
+    @if(productControl.value != null){
+      <div class="add-followUp d-flex justify-content-between w-100 py-1 px-2">
+        <span class="add-followUp-title">
+          Adicione grátis
+        </span>
+
+        <span class="add-followUp-subTitle">
+          Escolha {{qtdFollowUps}} de 4
+        </span>
+      </div>
+      <mat-list>
+        <mat-divider></mat-divider>
+        @for (followUp of data.products[0].followUps; track followUp.id) {
+          <mat-list-item>
+            <div class="d-flex justify-content-between add-followUp-btn">
+              <span class="sub-title">
+                {{followUp.description}}
+              </span>
+
+              <div>
+                <button (click)="addfollowUp(followUp)" type="button" class="btn btn-success">+</button>
+                @if(checkButtonNegative(followUp)){
+                  <span class="sub-title"> {{followUp.amount}} </span>
+                  <button (click)="removefollowUp(followUp)" type="button" class="btn btn-danger">-</button>
+                }
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        }
+      </mat-list>
+
+      <div class="add-followUp d-flex justify-content-between w-100 py-1 px-2">
+        <span class="add-followUp-title">
+          Adicione novos
+        </span>
+      </div>
+      <mat-list>
+        <mat-divider></mat-divider>
+        @for (followUpS of followUpSale; track followUpS.id) {
+          <mat-list-item>
+            <div class="d-flex justify-content-between add-followUp-btn">
+              <span class="sub-title">
+                {{followUpS.description}}, {{followUpS.value | currency:'BRL'}}
+              </span>
+
+              <div>
+                <button (click)="addfollowUpPage(followUpS)" type="button" class="btn btn-success">+</button>
+                @if(checkButtonNegativePage(followUpS)){
+                  <span class="sub-title"> {{followUpS.amount}} </span>
+                  <button (click)="removefollowUpPage(followUpS)" type="button" class="btn btn-danger">-</button>
+                }
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        }
+      </mat-list>
+    }
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <main class="w-100 px-3 d-flex justify-content-between align-items-center">
+    <div class="price">
+      {{ fromProduct.get('price')?.value | currency:'BRL' }}
+    </div>
+    <div>
+      <button mat-flat-button color="primary" (click)="onAdd()">Adicionar</button>
+    </div>
+  </main>
+</mat-dialog-actions>

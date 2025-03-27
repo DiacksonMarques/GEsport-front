@@ -1,3 +1,4 @@
+import { SaleComponent } from './pages/sale/sale/sale.component';
 import { ConfirmPresenceComponent } from './pages/selective-administrative/confirm-presence/confirm-presence.component';
 import { AthleteRegistrationComponent } from './pages/dashboard/athlete-registration/athlete-registration.component';
 import { Routes } from '@angular/router';
@@ -11,6 +12,7 @@ import { FinancialComponent } from './pages/dashboard/financial/financial.compon
 import { SelectiveRegistrationComponent } from './pages/selective/selective-registration/selective-registration.component';
 import { EvaluationCandidateComponent } from './pages/selective-administrative/evaluation-candidate/evaluation-candidate.component';
 import { SelectiveResultComponent } from './pages/selective/selective-result/selective-result.component';
+import { SaleViewComponent } from './pages/sale/sale-view/sale-view.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
@@ -22,6 +24,14 @@ export const routes: Routes = [
 
       {path: 'presenca', component: ConfirmPresenceComponent},
       {path: 'avalicao', component: EvaluationCandidateComponent},
+    ],
+    canActivate: [AuthGuardLogin]
+  },
+  { path: 'venda',
+    children: [
+      {path: '', component: SaleComponent},
+      {path: 'pesquisa', component: SaleViewComponent},
+      {path: 'pesquisa/:numberSale', component: SaleViewComponent},
     ],
     canActivate: [AuthGuardLogin]
   },
