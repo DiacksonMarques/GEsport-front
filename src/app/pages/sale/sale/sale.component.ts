@@ -14,7 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgxMaskDirective } from 'ngx-mask';
 import { StoreService } from '../../../core/service/store.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageRequest } from '../../../core/models/Message';
 import { MessageHintComponent } from '../../../../shared/message-hint/message-hint.component';
 
@@ -55,7 +55,8 @@ export class SaleComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
     private storeService: StoreService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ){
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -91,7 +92,7 @@ export class SaleComponent implements OnInit {
             timing: 7000
           });
 
-          this.router.navigateByUrl(`venda/${valeu.numberSale}`);
+          this.router.navigateByUrl(`venda/pesquisa/${valeu.numberSale}`);
         }
       })
     } else {
@@ -179,6 +180,10 @@ export class SaleComponent implements OnInit {
 
       this.recalculateTotalPrice();
     });
+
+    if(this.route.snapshot.params?.['idSeller']){
+      this.fromSale.get('sellerId')?.setValue(this.route.snapshot.params['idSeller']);
+    }
   }
 
   private addProduct(productSelect: any){

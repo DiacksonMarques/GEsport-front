@@ -13,6 +13,7 @@ import { SelectiveRegistrationComponent } from './pages/selective/selective-regi
 import { EvaluationCandidateComponent } from './pages/selective-administrative/evaluation-candidate/evaluation-candidate.component';
 import { SelectiveResultComponent } from './pages/selective/selective-result/selective-result.component';
 import { SaleViewComponent } from './pages/sale/sale-view/sale-view.component';
+import { SaleSellesComponent } from './pages/sale/sale-seller/sale-selles.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
@@ -30,8 +31,11 @@ export const routes: Routes = [
   { path: 'venda',
     children: [
       {path: '', component: SaleComponent},
+      {path: ':idSeller', component: SaleComponent},
       {path: 'pesquisa', component: SaleViewComponent},
       {path: 'pesquisa/:numberSale', component: SaleViewComponent},
+      {path: 'vendedor', component: SaleSellesComponent},
+      {path: 'vendedor/:idSeller', component: SaleSellesComponent},
     ],
     canActivate: [AuthGuardLogin]
   },
