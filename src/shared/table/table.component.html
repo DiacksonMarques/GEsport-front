@@ -26,7 +26,8 @@
               [type]="'button'"
               [color]="column.button?.color??'primary'"
               [description]="column.button?.description??''"
-              [iconNext]="column.button?.icon??''"
+              [iconNext]="column.button?.iconNext??''"
+              [icon]="column.button?.icon??''"
               [disabled]="column.button?.disabled ??false"
               [class]="'py-2'"
               (click)="buttonEvent.emit(row)">

@@ -7,6 +7,7 @@ export interface ColumnsTable{
   button?: {
     description?: string;
     icon?: string;
+    iconNext?: string;
     loading: boolean;
     color: string;
     disabled?: boolean;
