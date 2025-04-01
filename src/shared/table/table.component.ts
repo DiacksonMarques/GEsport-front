@@ -9,6 +9,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ButtonLoadingComponent } from '../button-loading/button-loading.component';
 import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import  {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'table-paginator',
@@ -22,7 +23,8 @@ import  {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DatePipe,
     ButtonLoadingComponent,
     NgxMaskPipe,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIcon
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },

@@ -33,4 +33,12 @@
       </button-loading>
     </div>
   </form>
+
+  <div class="col-12">
+    <table-paginator
+      [tableColumns]="displayedColumnsTableSales"
+      [dataSourceData]="sales"
+      (eventButton)="openModal($event)"
+    ></table-paginator>
+  </div>
 </section>

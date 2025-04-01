@@ -3,39 +3,47 @@
 
     @for (column of displayedColumns; track column) {
       <ng-container [matColumnDef]="column.tableColumn">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.columnName }} </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <div class="d-flex justify-content-center">
+            {{ column.columnName }}
+          </div>
+        </th>
         <td mat-cell *matCellDef="let row"
           matTooltip="{{ row[column.tableColumn] }}"
         >
-          @if(column.mask == "currency"){
+          <div class="d-flex justify-content-center">
+            @if(column.mask == "currency"){
 
-            {{ row[column.tableColumn] | currency: 'BRL' }}
+              {{ row[column.tableColumn] | currency: 'BRL' }}
 
-          } @else if(column.mask == "date"){
+            } @else if(column.mask == "date"){
 
-            {{ row[column.tableColumn] | date: 'dd/MM/yyyy' }}
+              {{ row[column.tableColumn] | date: 'dd/MM/yyyy' }}
 
-          }@else if(column.mask == "cpf"){
+            }@else if(column.mask == "cpf"){
 
-            {{ row[column.tableColumn] | mask: '000.000.000-00' }}
+              {{ row[column.tableColumn] | mask: '000.000.000-00' }}
 
-          }@else if(column.button?.description || column.button?.icon){
-
-            <button-loading
-              [loading]="column.button?.loading??false"
-              [type]="'button'"
-              [color]="column.button?.color??'primary'"
-              [description]="column.button?.description??''"
-              [iconNext]="column.button?.iconNext??''"
-              [icon]="column.button?.icon??''"
-              [disabled]="column.button?.disabled ??false"
-              [class]="'py-2'"
-              (click)="buttonEvent.emit(row)">
-            </button-loading>
-
-          } @else {
-            {{ row[column.tableColumn] }}
-          }
+            }@else if(column.button?.description || column.button?.icon){
+                <button-loading
+                  [loading]="column.button?.loading??false"
+                  [type]="'button'"
+                  [color]="column.button?.color??'primary'"
+                  [description]="column.button?.description??''"
+                  [iconNext]="column.button?.iconNext??''"
+                  [icon]="column.button?.icon??''"
+                  [disabled]="column.button?.disabled ??false"
+                  [class]="'py-2'"
+                  (click)="buttonEvent.emit(row)">
+                </button-loading>
+            } @else if(column.icon){
+                <mat-icon class="mat-18">{{column.icon(row[column.tableColumn])}}</mat-icon>
+            }  @else if(column.complement){
+              <mat-icon class="mat-18">{{column.complement(row[column.tableColumn])}}</mat-icon>
+            }  @else {
+              {{ row[column.tableColumn] }}
+            }
+          </div>
         </td>
       </ng-container>
     }

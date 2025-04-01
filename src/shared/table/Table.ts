@@ -2,8 +2,9 @@ export interface ColumnsTable{
   tableColumn: string;
   columnName: string;
   size?: number;
-  complement?: string;
+  complement?: (value: any)=>{};
   mask?: string;
+  icon?: (value: any)=>{};
   button?: {
     description?: string;
     icon?: string;

@@ -35,8 +35,8 @@ export class SaleService {
     return this.httpClient.get<ReturnGet<Sale>>(`${this.urlBase}/sale/${numberSale}`);
   }
 
-  getSaleSeller(sellerId: number): Observable<ReturnGet<Sale>>{
-    return this.httpClient.get<ReturnGet<Sale>>(`${this.urlBase}/checkSaleSeller/${sellerId}`);
+  getSaleSeller(sellerId: number): Observable<ReturnGet<Sale[]>>{
+    return this.httpClient.get<ReturnGet<Sale[]>>(`${this.urlBase}/checkSaleSeller/${sellerId}`);
   }
 
   getPixSale(txid: string): Observable<ReturnGet<Pix>>{
