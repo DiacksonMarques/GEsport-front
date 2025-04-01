@@ -27,7 +27,7 @@ export class SaleSellesComponent implements OnInit {
     { columnName: 'Venda', tableColumn: 'numberSale' },
     { columnName: 'Comprador', tableColumn: 'buyerName' },
     { columnName: 'Pagamento', tableColumn: 'paymentMehod', icon: this.returnIconTable },
-    { columnName: 'Ver venda', tableColumn: 'view', button: {icon: 'content_copy'} }
+    { columnName: 'Ver venda', tableColumn: 'view', button: {icon: 'file_open'} }
   ] as ColumnsTable[];
   sales!: Sale[];
 
