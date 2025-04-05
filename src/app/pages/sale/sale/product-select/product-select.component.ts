@@ -56,7 +56,7 @@ export class ProductSelectComponent implements OnInit {
   }
 
   onAdd(): void{
-    if(this.fromProduct.invalid || this.qtdFollowUps < 4){
+    if(this.fromProduct.invalid || this.qtdFollowUps < this.fromProduct.get('followUpQuantity')?.value){
       this.storeService.showMessage({
         type: 'warning',
         title: `Preencha todos os campos!`,
@@ -73,6 +73,7 @@ export class ProductSelectComponent implements OnInit {
     this.fromProduct = this._formBuilder.group({
       idProduct: [null, Validators.required],
       price: [0, Validators.required],
+      followUpQuantity: [0],
       followUps: [[]],
       followUpsPages: [[]]
     });
@@ -82,6 +83,7 @@ export class ProductSelectComponent implements OnInit {
         const product = this.data.products[value];
         this.fromProduct.get('idProduct')?.patchValue(product.id);
         this.fromProduct.get('price')?.patchValue(product.value);
+        this.fromProduct.get('followUpQuantity')?.patchValue(product.followUpQuantity);
 
          this.followUpSale = this.data.products[value].followUps;
       }
@@ -89,7 +91,7 @@ export class ProductSelectComponent implements OnInit {
   }
 
   addfollowUp(value: FollowUp):void{
-    if(this.qtdFollowUps >= 4)  return;
+    if(this.qtdFollowUps >= this.fromProduct.get('followUpQuantity')?.value)  return;
 
     const followUpsSelects = this.fromProduct.get("followUps")?.value as Array<FollowUp>;
     const indexFollowUp = followUpsSelects.findIndex(valueS => valueS.id == value.id);

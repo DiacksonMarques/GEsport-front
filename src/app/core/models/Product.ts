@@ -2,6 +2,7 @@ export interface Product {
   id: number;
   description: string;
   value: number;
+  followUpQuantity: number;
   followUps: Array<FollowUp>;
 }
 

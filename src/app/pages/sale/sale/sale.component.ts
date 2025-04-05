@@ -186,7 +186,7 @@ export class SaleComponent implements OnInit {
     }
   }
 
-  private addProduct(productSelect: any){
+  private addProduct(productSelect: any): void{
     const product = this.fromSale.get('product')?.value as UntypedFormArray;
     const productCopy = [...this.products];
 
@@ -209,7 +209,16 @@ export class SaleComponent implements OnInit {
     this.recalculateTotalPrice();
   }
 
-  recalculateTotalPrice(): void{
+  deleteProduct(indexProdutcs: number): void{
+    const product = this.fromSale.get('product')?.value as [];
+    this.productsSelect.splice(indexProdutcs, 1);
+    product.splice(indexProdutcs, 1);
+
+
+    this.recalculateTotalPrice();
+  }
+
+  private recalculateTotalPrice(): void{
     let some = 0;
 
     this.productsSelect.forEach(value => {
