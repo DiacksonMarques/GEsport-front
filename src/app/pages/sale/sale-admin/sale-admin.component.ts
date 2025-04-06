@@ -54,15 +54,25 @@ export class SaleAdminComponent implements OnInit {
       numberSale: [null],
     });
 
-    this.formFilter.valueChanges.subscribe(value => {
-      if(typeof value.paid == "number"){
-        if(value.paid == 2){
+    this.formFilter.get("paid")?.valueChanges.subscribe(value => {
+      if(typeof value == "number"){
+        if(value == 2){
           this.sales = this.salesCopy;
         } else {
-          this.sales = this.salesCopy.filter(valueFilter => valueFilter.paymentMehod && valueFilter.paymentMehod.paymentMehodId == value.paid)
+          this.sales = this.salesCopy.filter(valueFilter => valueFilter.paymentMehod && valueFilter.paymentMehod.paymentMehodId == value)
         }
-      } else if(value.numberSale) {
-        this.sales = this.salesCopy.filter(valueFilter => valueFilter.numberSale == value.numberSale)
+      }
+    });
+
+    this.formFilter.get("numberSale")?.valueChanges.subscribe(value => {
+      if(value) {
+        this.sales = this.salesCopy.filter(valueFilter => valueFilter.numberSale == value);
+      } else if(value == ""){
+        if(this.formFilter.get("paid")?.value == 2 || this.formFilter.get("paid")?.value == null){
+          this.sales = this.salesCopy;
+        } else {
+          this.sales = this.salesCopy.filter(valueFilter => valueFilter.paymentMehod && valueFilter.paymentMehod.paymentMehodId == this.formFilter.get("paid")?.value);
+        }
       }
     });
   }
