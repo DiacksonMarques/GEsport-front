@@ -35,6 +35,10 @@ export class SaleService {
     return this.httpClient.get<ReturnGet<Sale[]>>(`${this.urlBase}/allSale`);
   }
 
+  getAllSaleStatus(): Observable<ReturnGet<Sale[]>>{
+    return this.httpClient.get<ReturnGet<Sale[]>>(`${this.urlBase}/allSaleStatus`);
+  }
+
   getSale(numberSale: number): Observable<ReturnGet<Sale>>{
     return this.httpClient.get<ReturnGet<Sale>>(`${this.urlBase}/sale/${numberSale}`);
   }

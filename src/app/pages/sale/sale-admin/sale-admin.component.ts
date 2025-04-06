@@ -52,6 +52,7 @@ export class SaleAdminComponent implements OnInit {
     this.formFilter = this._formBuilder.group({
       paid: [null],
       numberSale: [null],
+      delivery: [null],
     });
 
     this.formFilter.get("paid")?.valueChanges.subscribe(value => {
@@ -75,11 +76,31 @@ export class SaleAdminComponent implements OnInit {
         }
       }
     });
+
+    this.formFilter.get("delivery")?.valueChanges.subscribe(value => {
+      if(value == 0) {
+        this.sales = [];
+        this.loadTable = true;
+        this.saleService.getAllSaleStatus().subscribe(value => {
+          this.sales = value.value;
+          this.salesCopy = value.value;
+          this.loadTable = false;
+        }, () => this.loadTable = false);
+      } else if(value == 1){
+        this.sales = [];
+        this.loadTable = true;
+        this.saleService.getAllSale().subscribe(value => {
+          this.sales = value.value;
+          this.salesCopy = value.value;
+          this.loadTable = false;
+        }, () => this.loadTable = false);
+      }
+    });
   }
 
   loadPage(): void{
     this.loadTable = true;
-    this.saleService.getAllSale().subscribe(value => {
+    this.saleService.getAllSaleStatus().subscribe(value => {
       this.sales = value.value;
       this.salesCopy = value.value;
       this.loadTable = false;

@@ -13,6 +13,15 @@
         <form [formGroup]="formFilter" class="row align-items-center">
           <div class="col-3">
             <mat-form-field  class="w-100"  appearance="outline">
+              <mat-label>Saiu entrega</mat-label>
+              <mat-select formControlName="delivery">
+                <mat-option [value]="0">Não Saiu</mat-option>
+                <mat-option [value]="1">Todos</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field  class="w-100"  appearance="outline">
               <mat-label>Tipo Pagamento</mat-label>
               <mat-select formControlName="paid">
                 <mat-option [value]="2">Todos</mat-option>
