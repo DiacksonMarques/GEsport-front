@@ -51,7 +51,7 @@ export class SaleAdminComponent implements OnInit {
 
     this.formFilter = this._formBuilder.group({
       paid: [null],
-      paidOk: [null],
+      numberSale: [null],
     });
 
     this.formFilter.valueChanges.subscribe(value => {
@@ -61,6 +61,8 @@ export class SaleAdminComponent implements OnInit {
         } else {
           this.sales = this.salesCopy.filter(valueFilter => valueFilter.paymentMehod && valueFilter.paymentMehod.paymentMehodId == value.paid)
         }
+      } else if(value.numberSale) {
+        this.sales = this.salesCopy.filter(valueFilter => valueFilter.numberSale == value.numberSale)
       }
     });
   }
