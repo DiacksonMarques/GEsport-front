@@ -12,5 +12,6 @@ export interface ColumnsTable{
     loading: boolean;
     color: string;
     disabled?: boolean;
+    callback: (value: any)=>{};
   }
 }

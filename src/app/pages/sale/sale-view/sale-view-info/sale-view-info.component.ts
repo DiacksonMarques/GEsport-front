@@ -16,6 +16,7 @@ import { ButtonLoadingComponent } from '../../../../../shared/button-loading/but
 import { GenreicD } from '../../../../core/models/Generic';
 import { StoreService } from '../../../../core/service/store.service';
 import { SaleService } from '../../../../core/service/sale.service';
+import { NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-sale-view-info',
@@ -31,13 +32,13 @@ import { SaleService } from '../../../../core/service/sale.service';
     MatStepperModule,
     DatePipe,
     CurrencyPipe,
-    ButtonLoadingComponent
+    ButtonLoadingComponent,
+    NgxMaskPipe,
   ],
   templateUrl: './sale-view-info.component.html',
   styleUrl: './sale-view-info.component.scss'
 })
 export class SaleViewInfoComponent implements OnInit{
-
   @Input('sale') set saleInput(value: Sale|null){
     this.sale = null;
     this.viewMessagePayment = false;

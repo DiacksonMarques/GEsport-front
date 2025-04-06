@@ -55,8 +55,6 @@ export class TableComponent implements AfterViewInit, OnInit {
   };
   @Input() spinnerLoader = false;
 
-  @Output('eventButton') buttonEvent = new EventEmitter<any>();
-
   dataSource!: MatTableDataSource<any>;
   columnsHeader!: string[];
   dataSourceData!: any[];

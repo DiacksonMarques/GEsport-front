@@ -3,10 +3,8 @@
 
     @for (column of displayedColumns; track column) {
       <ng-container [matColumnDef]="column.tableColumn">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div class="d-flex justify-content-center">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="justify-content-center">
             {{ column.columnName }}
-          </div>
         </th>
         <td mat-cell *matCellDef="let row"
           matTooltip="{{ row[column.tableColumn] }}"
@@ -34,7 +32,7 @@
                   [icon]="column.button?.icon??''"
                   [disabled]="column.button?.disabled ??false"
                   [class]="'py-2'"
-                  (click)="buttonEvent.emit(row)">
+                  (click)="column.button?.callback(row)">
                 </button-loading>
             } @else if(column.icon){
                 <mat-icon class="mat-18">{{column.icon(row[column.tableColumn])}}</mat-icon>

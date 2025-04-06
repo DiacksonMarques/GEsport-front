@@ -31,6 +31,10 @@ export class SaleService {
     return this.httpClient.get<ReturnGet<Genreic[]>>(`${this.urlBase}/allSeller`);
   }
 
+  getAllSale(): Observable<ReturnGet<Sale[]>>{
+    return this.httpClient.get<ReturnGet<Sale[]>>(`${this.urlBase}/allSale`);
+  }
+
   getSale(numberSale: number): Observable<ReturnGet<Sale>>{
     return this.httpClient.get<ReturnGet<Sale>>(`${this.urlBase}/sale/${numberSale}`);
   }
@@ -53,5 +57,9 @@ export class SaleService {
 
   putPaymentMethod(paymentMehod: any): Observable<ReturnGet<Sale>>{
     return this.httpClient.put<ReturnGet<Sale>>(`${this.urlBase}/updatePaymentMethod`, paymentMehod);
+  }
+
+  putDeliveryStatus(saleSatsus: any): Observable<ReturnGet<Sale>>{
+    return this.httpClient.put<ReturnGet<Sale>>(`${this.urlBase}/updateDeliveryStatus`, saleSatsus);
   }
 }

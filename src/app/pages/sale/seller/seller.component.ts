@@ -28,7 +28,7 @@ export class SellerComponent implements OnInit{
   displayedColumnsTableSeller = [
     { columnName: 'Id', tableColumn: 'id'},
     { columnName: 'Nome', tableColumn: 'name'},
-    { columnName: 'Link vendedor', tableColumn: 'view', button: {icon: 'content_copy'}}
+    { columnName: 'Link vendedor', tableColumn: 'view', button: {icon: 'content_copy', callback: this.copyLinkSeller.bind(this)}}
   ] as ColumnsTable[];
   sellers!: Genreic[];
 

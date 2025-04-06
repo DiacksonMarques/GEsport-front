@@ -26,7 +26,7 @@ export class EvaluationCandidateComponent {
   displayedColumns = [
     { columnName: 'Inscrição', tableColumn: 'enrollment' },
     { columnName: 'Nome', tableColumn: 'name' },
-    { columnName: 'Confirma', tableColumn: 'button', button: {loading: false, icon: 'assignment_turned_in', description: 'Avaliar', disabled: true}}
+    { columnName: 'Confirma', tableColumn: 'button', button: {loading: false, icon: 'assignment_turned_in', description: 'Avaliar', disabled: true, callback: this.openDialog.bind(this)}}
   ] as ColumnsTable[];
   candidates!: Candidate[];
 

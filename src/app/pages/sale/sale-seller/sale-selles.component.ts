@@ -27,7 +27,7 @@ export class SaleSellesComponent implements OnInit {
     { columnName: 'Venda', tableColumn: 'numberSale' },
     { columnName: 'Comprador', tableColumn: 'buyerName' },
     { columnName: 'Pagamento', tableColumn: 'paymentMehod', icon: this.returnIconTable },
-    { columnName: 'Ver venda', tableColumn: 'view', button: {icon: 'file_open'} }
+    { columnName: 'Ver venda', tableColumn: 'view', button: {icon: 'file_open', callback: this.openModal.bind(this)} }
   ] as ColumnsTable[];
   sales!: Sale[];
 
@@ -57,12 +57,11 @@ export class SaleSellesComponent implements OnInit {
     }
   }
 
-  openModal(sale: Sale):void{
+  private openModal(sale: Sale):void{
     this.dialog.open(SaleSellerModalComponent, {
       height: '90%',
       data: sale,
     });
-
   }
 
   loadPage(): void{

@@ -15,6 +15,7 @@ import { SelectiveResultComponent } from './pages/selective/selective-result/sel
 import { SaleViewComponent } from './pages/sale/sale-view/sale-view.component';
 import { SaleSellesComponent } from './pages/sale/sale-seller/sale-selles.component';
 import { SellerComponent } from './pages/sale/seller/seller.component';
+import { SaleAdminComponent } from './pages/sale/sale-admin/sale-admin.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
@@ -38,6 +39,7 @@ export const routes: Routes = [
       {path: 'vendedor', component: SaleSellesComponent},
       {path: 'vendedor/:idSeller', component: SaleSellesComponent},
       {path: 'admin', children: [
+        {path: '', component: SaleAdminComponent},
         {path: 'vendedor', component: SellerComponent},
       ]},
     ],

@@ -191,8 +191,7 @@
                       } @else {
                       <div class="title">Endereço:</div>
                       <div class="sub-title">
-                        {{ sale.address }}, {{ sale.neighborhood }}, Nº
-                        {{ sale.number }}
+                        {{ sale.address }}, {{ sale.neighborhood }}, Nº {{ sale.number }}
                       </div>
                       <div class="sub-title">
                         Ponto de referencia: {{ sale.referencePoint }}
@@ -208,8 +207,7 @@
                     linear
                     orientation="vertical"
                   >
-                    @for (satus of statusSale; track satus.id) { @if(satus.id <=
-                    sale.deliveryStatus){
+                    @for (satus of statusSale; track satus.id) { @if(satus.id <= sale.deliveryStatus){
                     <mat-step [editable]="false">
                       <ng-template matStepLabel>{{
                         satus.description
@@ -217,6 +215,31 @@
                     </mat-step>
                     } }
                   </mat-stepper>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-sm-12 col-md-11 col-lg-6 col-12">
+              <mat-card class="p-1 mt-2">
+                <mat-card-header>
+                  <span class="title-total"> Dados do Comprador </span>
+                </mat-card-header>
+
+                <mat-divider></mat-divider>
+
+                <mat-card-content>
+                  <mat-list>
+                    <mat-list-item class="products">
+                      <div class="title">Nome:</div>
+                      <div class="sub-title">
+                        {{ sale.buyerName }}
+                      </div>
+                      <mat-divider></mat-divider>
+                      <div class="title">Telefone:</div>
+                      <div class="sub-title">
+                        {{ sale.phone | mask:"(00) 0 0000-0000" }}
+                      </div>
+                    </mat-list-item>
+                  </mat-list>
                 </mat-card-content>
               </mat-card>
             </div>

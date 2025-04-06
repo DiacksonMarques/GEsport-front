@@ -1,0 +1,30 @@
+<main class="py-3 px-2">
+  <mat-form-field class="w-100 mt-2"  appearance="outline">
+    <mat-label>Novo Status</mat-label>
+    <mat-select [formControl]="statusId">
+      @for(status of statusSale; track status.id){
+        <mat-option [value]="status.id">{{status.description}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-stepper
+    [selectedIndex]="idStepper"
+    [linear]="false"
+    orientation="vertical"
+  >
+    @for (satus of statusSale; track satus.id) {
+      @if(satus.id <= sale.deliveryStatus){
+        <mat-step [editable]="false">
+          <ng-template matStepLabel>{{
+            satus.description
+          }}</ng-template>
+        </mat-step>
+      }
+    }
+  </mat-stepper>
+</main>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Sair</button>
+</mat-dialog-actions>
+

@@ -21,7 +21,7 @@ export class ConfirmPresenceComponent {
     { columnName: 'Inscrição', tableColumn: 'enrollment' },
     { columnName: 'Nome', tableColumn: 'name' },
     { columnName: 'CPF', tableColumn: 'cpf', mask: 'cpf' },
-    { columnName: 'Confirma', tableColumn: 'button', button: {loading: false, icon: 'send', description: 'Presença'}}
+    { columnName: 'Confirma', tableColumn: 'button', button: {loading: false, icon: 'send', description: 'Presença', callback: this.confirmCandidate.bind(this)}}
   ] as ColumnsTable[];
   candidates!: Candidate[];
   loadingCandidates = false
