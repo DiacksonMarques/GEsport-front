@@ -37,7 +37,7 @@
             } @else if(column.icon){
                 <mat-icon class="mat-18">{{column.icon(row[column.tableColumn])}}</mat-icon>
             }  @else if(column.complement){
-              <mat-icon class="mat-18">{{column.complement(row[column.tableColumn])}}</mat-icon>
+              {{column.complement(row)}}
             }  @else {
               {{ row[column.tableColumn] }}
             }

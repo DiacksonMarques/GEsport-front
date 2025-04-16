@@ -123,10 +123,10 @@ export class SaleAdminComponent implements OnInit {
   }
 
   private returnIconTable(value: PaymentMehod): string{
-      if(value && value.paid){
-        return 'check';
-      }
-
-      return 'warning';
+    if(value && value.paid){
+      return 'check';
     }
+
+    return 'warning';
+  }
 }
