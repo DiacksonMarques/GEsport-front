@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageRequest } from '../../app/core/models/Message';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -9,7 +10,8 @@ import { MatDividerModule } from '@angular/material/divider';
   selector: 'app-message',
   standalone: true,
   imports: [
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule
   ],
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss', './icon-message.component.scss']
