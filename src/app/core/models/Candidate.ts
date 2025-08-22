@@ -10,6 +10,7 @@ export interface Candidate{
   school_id?: number;
   cpf: string;
   enrollment: string;
+  txid: string;
   pixName: string;
   pixStatus: string;
   pixMaturity: string;
