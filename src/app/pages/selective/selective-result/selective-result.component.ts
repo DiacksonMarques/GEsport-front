@@ -60,7 +60,7 @@ export class SelectiveResultComponent implements OnInit {
             response.value.enrollment != null &&
             response.value.result == null
           ){
-            this.checkTypeInformation = 1;
+            this.checkTypeInformation = 0;
             this.result = response.value;
 
           }  else if(response.value.result != null) {
