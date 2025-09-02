@@ -52,7 +52,7 @@ export class SelectiveRegistrationComponent implements OnInit{
       this.loadingSubmitForm = true;
       const value = this.formCandidate.value as Candidate;
       
-      const yearsAccepted = [2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014];
+      const yearsAccepted = [2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014];
       const birthDate = new Date(value.birthDate);
 
       console.log(value);
