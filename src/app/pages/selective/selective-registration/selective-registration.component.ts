@@ -61,7 +61,7 @@ export class SelectiveRegistrationComponent implements OnInit{
         this.storeService.showMessage({
           type: 'warning',
           title: `Idade fora da faixa permitida!`,
-          subTitle:`As inscrições para a Seletiva Masculina 2025 estão limitadas a uma faixa etária específica. 
+          subTitle:`As inscrições para a Seletiva Feminina 2025 estão limitadas a uma faixa etária específica. 
             Caso sua idade não se enquadre, o sistema bloqueará o cadastro. Se ainda assim tiver interesse, fale com o clube pelo Instagram @acevoleibol.clube`,
           buttons:[{
             type: 'primary',
