@@ -118,38 +118,60 @@ export class TrackRegistrationComponent implements OnInit {
 
   private checkViewInformation(){
     this.valueInformationView.enrollment = this.valueCandidate.enrollment ?? '';
+    this.valueInformationView.locationSelective = 'Colégio D. Maria Amélia B.';
 
-    this.valueInformationView.dateSelective = this.valueCandidate.gender == 'MASCULINO' ? '25/02/2025' : '26/02/2025';
-    this.valueInformationView.locationSelective = this.valueCandidate.gender == 'MASCULINO' ? 'Colégio D. Maria Amélia B.' : 'Colégio Gov. Adauto Bezerra';
-
-    this.valueInformationView.pixName = this.valueCandidate.pixName;
-    this.valueInformationView.pixMaturity = this.valueCandidate.pixMaturity;
-    this.valueInformationView.pixValue = this.valueCandidate.pixValue;
-    this.valueInformationView.pixCopyPaste = this.valueCandidate.pixCopyPaste;
-    this.valueInformationView.pixQrCode = this.valueCandidate.pixQrCode;
-
-    const today = new Date();
     const birthDate = new Date(this.valueCandidate.birthDate);
 
-    const age = today.getFullYear() - birthDate.getFullYear();
-
-    this.valueInformationView.age = age;
-
-    if([2013,2012,2011,2010].includes(birthDate.getFullYear())){
-      this.valueInformationView.hourSelective = '17h às 18h';
-    } else if([2009, 2008, 2007, 2006].includes(birthDate.getFullYear())){
+    if([2012, 2013, 2014].includes(birthDate.getFullYear())){
+      this.valueInformationView.dateSelective = "02/09/2025";
+      this.valueInformationView.hourSelective = '17:30h às 18:30h';
+    } else if([2009, 2010, 2011].includes(birthDate.getFullYear())){
+      this.valueInformationView.dateSelective = "02/09/2025";
+      this.valueInformationView.hourSelective = '18:30h às 19:30h';
+    } else if([2008, 2007, 2006].includes(birthDate.getFullYear())){
+      this.valueInformationView.dateSelective = "04/09/2025";
       this.valueInformationView.hourSelective = '18h às 19h';
-    } else if([2005, 2004, 2003, 2002].includes(birthDate.getFullYear())){
-      this.valueInformationView.hourSelective = '19h às 20h';
-    } else if(age >= 18){
-      this.valueInformationView.hourSelective = '19h às 20h';
     } else {
-      this.valueInformationView.hourSelective = '17h às 18h';
+      this.valueInformationView.dateSelective = "04/09/2025";
+      this.valueInformationView.hourSelective = '19h às 20h';
     }
+    
+
+    if(this.valueCandidate.txid != "NOTPAGE"){
+      this.valueInformationView.pixName = this.valueCandidate.pixName;
+      this.valueInformationView.pixMaturity = this.valueCandidate.pixMaturity;
+      this.valueInformationView.pixValue = this.valueCandidate.pixValue;
+      this.valueInformationView.pixCopyPaste = this.valueCandidate.pixCopyPaste;
+      this.valueInformationView.pixQrCode = this.valueCandidate.pixQrCode;
+    }
+
+    /* 
+      this.valueInformationView.dateSelective = this.valueCandidate.gender == 'MASCULINO' ? '25/02/2025' : '26/02/2025';
+      this.valueInformationView.locationSelective = this.valueCandidate.gender == 'MASCULINO' ? 'Colégio D. Maria Amélia B.' : 'Colégio Gov. Adauto Bezerra'; 
+
+      const today = new Date();
+      const birthDate = new Date(this.valueCandidate.birthDate);
+
+      const age = today.getFullYear() - birthDate.getFullYear();
+
+      this.valueInformationView.age = age;
+
+      if([2013,2012,2011,2010].includes(birthDate.getFullYear())){
+        this.valueInformationView.hourSelective = '17h às 18h';
+      } else if([2009, 2008, 2007, 2006].includes(birthDate.getFullYear())){
+        this.valueInformationView.hourSelective = '18h às 19h';
+      } else if([2005, 2004, 2003, 2002].includes(birthDate.getFullYear())){
+        this.valueInformationView.hourSelective = '19h às 20h';
+      } else if(age >= 18){
+        this.valueInformationView.hourSelective = '19h às 20h';
+      } else {
+        this.valueInformationView.hourSelective = '17h às 18h';
+      } 
+    */
   }
 
   private checkViewMessage(): void{
-    if(this.valueCandidate.pixStatus == "CONCLUIDA"){
+    if(this.valueCandidate.pixStatus == "CONCLUIDA" && this.valueCandidate.txid != "NOTPAGE"){
       this.messagePayment = {
         type: "success",
         title: "Incrição deferida.",
@@ -158,18 +180,15 @@ export class TrackRegistrationComponent implements OnInit {
 
       this.viewMessagePayment = true;
       return;
-    }
-
-    /* if(this.valueCandidate.pixStatus == "FF"){
+    } else  if (this.valueCandidate.pixStatus == "CONCLUIDA" && this.valueCandidate.txid == "NOTPAGE") {
       this.messagePayment = {
-        type: "warning",
-        title: "Pagamento informado.",
-        subTitle: "Aguardando o deferimento!"
+        type: "success",
+        title: "Incrição deferida.",
+        subTitle: "A sua inscrição foi finalizada com sucesso!"
       };
 
       this.viewMessagePayment = true;
       return;
-    } */
-
+    }
   }
 }

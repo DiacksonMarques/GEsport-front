@@ -12,6 +12,7 @@ import { forkJoin, map, Observable, startWith } from 'rxjs';
 import { Category } from '../../../core/models/Category';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { Candidate } from '../../../core/models/Candidate';
 
 @Component({
   selector: 'app-selective-registration',
@@ -49,7 +50,28 @@ export class SelectiveRegistrationComponent implements OnInit{
   onSubmit(): void {
     if(this.formCandidate.valid){
       this.loadingSubmitForm = true;
-      const value = this.formCandidate.value;
+      const value = this.formCandidate.value as Candidate;
+      
+      const yearsAccepted = [2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014];
+      const birthDate = new Date(value.birthDate);
+
+      console.log(value);
+
+      if(!yearsAccepted.includes(birthDate.getFullYear())){
+        this.storeService.showMessage({
+          type: 'warning',
+          title: `Idade fora da faixa permitida!`,
+          subTitle:`As inscrições para a Seletiva Masculina 2025 estão limitadas a uma faixa etária específica. 
+            Caso sua idade não se enquadre, o sistema bloqueará o cadastro. Se ainda assim tiver interesse, fale com o clube pelo Instagram @acevoleibol.clube`,
+          buttons:[{
+            type: 'primary',
+            text: 'Fechar',
+            function: 'close'
+          }]
+        });
+        this.loadingSubmitForm = false;
+        return;
+      }
 
       this.selectiveService.createCandidate(value).subscribe(response => {
           this.storeService.showMessage({
