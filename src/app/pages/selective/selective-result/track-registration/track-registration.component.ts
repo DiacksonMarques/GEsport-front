@@ -124,16 +124,13 @@ export class TrackRegistrationComponent implements OnInit {
 
     if([2012, 2013, 2014].includes(birthDate.getFullYear())){
       this.valueInformationView.dateSelective = "24/09/2025";
-      this.valueInformationView.hourSelective = '17:30h às 18:30h';
+      this.valueInformationView.hourSelective = '18:30h às 19:30h';
     } else if([2009, 2010, 2011].includes(birthDate.getFullYear())){
       this.valueInformationView.dateSelective = "24/09/2025";
       this.valueInformationView.hourSelective = '18:30h às 19:30h';
-    } else if([2008, 2007, 2006].includes(birthDate.getFullYear())){
-      this.valueInformationView.dateSelective = "24/09/2025";
-      this.valueInformationView.hourSelective = '18h às 19h';
     } else {
-      this.valueInformationView.dateSelective = "04/09/2025";
-      this.valueInformationView.hourSelective = '19h às 20h';
+      this.valueInformationView.dateSelective = "24/09/2025";
+      this.valueInformationView.hourSelective = '19:30 às 20:30h';
     }
     
 
