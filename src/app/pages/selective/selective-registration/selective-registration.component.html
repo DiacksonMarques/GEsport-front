@@ -87,8 +87,8 @@
           <mat-form-field class="w-100"  appearance="outline">
             <mat-label>Categoria</mat-label>
             <mat-select formControlName="gender">
-              <mat-option value="MASCULINO">Masculina</mat-option>
-              <!-- <mat-option value="FEMININO">Feminina</mat-option> -->
+              <!-- <mat-option value="MASCULINO">Masculina</mat-option> -->
+              <mat-option value="FEMININO">Feminina</mat-option>
             </mat-select>
             @if(formCandidate.controls['gender'].errors?.['required']){
               <mat-error>Este campo é obrigatório</mat-error>
@@ -177,7 +177,7 @@
             [loading]="loadingSubmitForm"
             [type]="'submit'"
             [color]="'primary'"
-            [disabled]="true"
+            [disabled]="false"
             [description]="'Confirma inscrição'"
             [iconNext]="'arrow_forward'"
             [class]="'w-100'">
