@@ -118,7 +118,7 @@ export class TrackRegistrationComponent implements OnInit {
 
   private checkViewInformation(){
     this.valueInformationView.enrollment = this.valueCandidate.enrollment ?? '';
-    this.valueInformationView.locationSelective = 'Colégio Pelúsio Correia';
+    this.valueInformationView.locationSelective = 'Colégio Conserva Feitosa';
 
     const birthDate = new Date(this.valueCandidate.birthDate);
 
