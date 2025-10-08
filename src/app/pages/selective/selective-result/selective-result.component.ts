@@ -60,20 +60,24 @@ export class SelectiveResultComponent implements OnInit {
             response.value.enrollment != null &&
             response.value.result == null
           ){
-            if(response.value.gender == "MASCULINO"){
+            /* if(response.value.gender == "MASCULINO"){
               this.checkTypeInformation = 1;
             } else {
               this.checkTypeInformation = 0;
-            }
+            } */
+
+            this.checkTypeInformation = 1;
 
             this.result = response.value;
             
           }  else if(response.value.result != null) {
-            if(response.value.gender == "MASCULINO"){
+            /* if(response.value.gender == "MASCULINO"){
               this.checkTypeInformation = 1;
             } else {
               this.checkTypeInformation = 0;
-            }
+            } */
+
+            this.checkTypeInformation = 1;
             
             this.result = response.value;
 
