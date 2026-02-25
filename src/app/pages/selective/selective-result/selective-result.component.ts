@@ -69,7 +69,7 @@ export class SelectiveResultComponent implements OnInit {
             this.checkTypeInformation = 1;
 
             this.result = response.value;
-            
+
           }  else if(response.value.result != null) {
             /* if(response.value.gender == "MASCULINO"){
               this.checkTypeInformation = 1;
@@ -78,7 +78,7 @@ export class SelectiveResultComponent implements OnInit {
             } */
 
             this.checkTypeInformation = 1;
-            
+
             this.result = response.value;
 
           } else {

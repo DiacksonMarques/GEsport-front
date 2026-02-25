@@ -18,6 +18,7 @@ import { SellerComponent } from './pages/sale/seller/seller.component';
 import { SaleAdminComponent } from './pages/sale/sale-admin/sale-admin.component';
 import { ChampionshipCreateComponent } from './pages/championship/championship-create/championship-create.component';
 import { ChampionshipViewComponent } from './pages/championship/championship-view/championship-view.component';
+import { ChampionshipFollowUpComponent } from './pages/championship/championship-follow-up/championship-follow-up.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin]},
@@ -50,8 +51,9 @@ export const routes: Routes = [
   { path: 'copa',
     children: [
       {path: 'inscricao', component: ChampionshipCreateComponent},
+      {path: 'acompanhe', component: ChampionshipFollowUpComponent},
+      {path: 'acompanhe/:followUp', component: ChampionshipFollowUpComponent},
       {path: 'inscricaos', component: ChampionshipViewComponent},
-
     ],
     canActivate: [AuthGuardLogin]
   },

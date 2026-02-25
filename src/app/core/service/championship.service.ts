@@ -20,7 +20,19 @@ export class ChampionshipService {
     return this.httpCLient.post<Championship>(`${this.urlBase}/createTeam`, value);
   }
 
+  editTeam(value: Championship): Observable<Championship>{
+    return this.httpCLient.put<Championship>(`${this.urlBase}/editTeam`, value);
+  }
+
+  deleteTeam(enrollment: string): Observable<ReturnGet<any>>{
+    return this.httpCLient.delete<ReturnGet<any>>(`${this.urlBase}/deleteTeam/${enrollment}`);
+  }
+
   allTeams(): Observable<ReturnGet<Championship[]>>{
     return this.httpCLient.get<ReturnGet<Championship[]>>(`${this.urlBase}/teams`);
+  }
+
+  getTeam(enrollment: string): Observable<ReturnGet<Championship>>{
+    return this.httpCLient.get<ReturnGet<Championship>>(`${this.urlBase}/team/${enrollment}`);
   }
 }
