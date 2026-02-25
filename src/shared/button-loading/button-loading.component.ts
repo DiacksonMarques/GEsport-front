@@ -7,7 +7,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'button-loading',
   standalone: true,
   imports: [
-    MatButtonModule,
     MatProgressSpinnerModule,
     MatButtonModule,
     MatIconModule

@@ -9,8 +9,10 @@ export interface Championship{
     name: string;
     uf: string
   };
-  category: string;
-  naipe: string;
+  categories: Array<{
+    category: string;
+    naipe: string;
+  }>;
   id: number;
   enrollment: string;
 }

@@ -3,10 +3,13 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Form } from '../../../core/modules/input.module';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormGroupDirective, ValidationErrors, Validators } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
 import { MatDividerModule } from '@angular/material/divider';
 import { Championship } from '../../../core/models/Championship';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-championship-create',
@@ -16,7 +19,9 @@ import { Championship } from '../../../core/models/Championship';
     MatCardModule,
     MatIconModule,
     NgxMaskDirective,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule,
+    MatListModule
   ],
   templateUrl: './championship-create.component.html',
   styleUrl: './championship-create.component.scss'
@@ -29,9 +34,23 @@ export class ChampionshipCreateComponent {
 
   registration!: Championship;
 
+  listNaipesSelect = [
+    {value: "AMB", label:"Masc e Femi"},
+    {value: "MASCULINO", label:"Masculino"},
+    {value: "FEMININO", label:"Feminino"},
+  ];
+
+  listCategoriesSelect = [
+    {value: "ADL", label:"Adulto"},
+    {value: "SUB19", label:"Sub-19"},
+    {value: "SUB17", label:"Sub-17"},
+    {value: "SUB14", label:"Sub-14"},
+  ];
+
   constructor(
     private _formBuilder: FormBuilder,
-    private championshipService: ChampionshipService
+    private championshipService: ChampionshipService,
+    private router: Router
   ){this.loadPage()}
 
   loadPage(): void{
@@ -46,6 +65,7 @@ export class ChampionshipCreateComponent {
         name: [null, [Validators.required]],
         uf: [null, [Validators.required]]
       }),
+      categories: [[], [this.customValidatorCategories]],
       category: [null, [Validators.required]],
       naipe: [null, [Validators.required]],
     });
@@ -70,5 +90,57 @@ export class ChampionshipCreateComponent {
     this.formTeam.reset();
 
     this.messageSuccess = false;
+  }
+
+  addNewCategory(){
+    const category = this.formTeam.get("category");
+    const naipe = this.formTeam.get("naipe");
+    const categories = this.formTeam.get("categories")?.value as Array<any>;
+
+    if(!category?.value || !naipe?.value){
+      category?.markAsTouched();
+      naipe?.markAsTouched();
+
+      return;
+    }
+
+    if(
+      categories.find(categoryInList => categoryInList.category == category?.value && categoryInList.naipe == naipe?.value) ||
+      categories.find(categoryInList => categoryInList.category == category?.value && categoryInList.naipe == "AMB")
+    ){
+      return;
+    }
+
+    categories.push({category: category.value, naipe: naipe.value});
+    this.formTeam.get("categories")?.updateValueAndValidity();
+  }
+
+  redirectPageFollowUp(enrollment: string){
+    this.router.navigateByUrl(`/copa/acompanhe/${enrollment}`);
+  }
+
+  deleteCategory(index: any){
+    const categories = this.formTeam.get("categories")?.value as Array<any>;
+
+    categories.splice(index, 1);
+    this.formTeam.get("categories")?.updateValueAndValidity();
+  }
+
+  labelCategory(value: string){
+    return this.listCategoriesSelect.find(category => category.value == value)?.label
+  }
+
+  labelNaipe(value: string){
+    return this.listNaipesSelect.find(naipe => naipe.value == value)?.label
+  }
+
+  customValidatorCategories(val: AbstractControl): ValidationErrors | null {
+    const categories = val?.value as [];
+
+    if(categories.length == 0){
+      return {notCategories: true}
+    }
+
+    return null;
   }
 }

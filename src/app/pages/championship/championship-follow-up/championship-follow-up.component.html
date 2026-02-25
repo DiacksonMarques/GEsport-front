@@ -1,6 +1,33 @@
-<main class="container-fluid p-3">
-  <form [formGroup]="formTeam" (ngSubmit)="onSubmit()" #formDirective="ngForm">
-    @if(messageSuccess == false){
+<section class="container">
+  <form [formGroup]="formEnrollment" (ngSubmit)="onSubmitEnrollment()" class="row justify-content-center py-3">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Número da pré-incrição</mat-label>
+        <input matInput type="text" formControlName="enrollment" placeholder="Digite o número de inscrição" />
+        @if(formEnrollment.controls['enrollment'].errors?.['required']){
+          <mat-error>Este campo é obrigatório</mat-error>
+        }
+        @if(formEnrollment.controls['enrollment'].errors?.['mask']){
+          <mat-error>Valor digitado errado</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-12 col-md-5 col-lg-4 col-12">
+      <button-loading
+        [loading]="loadingSubmitForm"
+        [type]="'submit'"
+        [color]="'primary'"
+        [description]="'Pesquisar'"
+        [iconNext]="'arrow_forward'"
+        [class]="'w-100 p-1-7'">
+      </button-loading>
+    </div>
+  </form>
+</section>
+@if (showCardData) {
+  <main class="container-fluid">
+    <form [formGroup]="formTeam" (ngSubmit)="onSubmit()" #formDirective="ngForm">
       <div class="row justify-content-center">
         <mat-card class="col-11">
           <mat-card-header>
@@ -11,7 +38,37 @@
             <mat-card-subtitle>Tela para fazer a sua pré-inscrição para demostra o seu interesse!</mat-card-subtitle>
           </mat-card-header>
 
+          <div class="row justify-content-end py-2">
+            @if(!modeEditing){
+              <div class="col-sm-5 col-md-4 col-lg-3 col-12 mb-3">
+                <button (click)="showEdintingMode()" type="button" class="w-100" color="primary" mat-raised-button>
+                  <mat-icon class="m0">draw</mat-icon>
+                  Editar Pré-inscrição
+                </button>
+              </div>
+            }
+
+            <div class="col-sm-5 col-md-4 col-lg-3 col-12">
+              <button (click)="deleteEnrollment()" type="button" class="w-100" color="warn" mat-raised-button>
+                <mat-icon class="m0">delete</mat-icon>
+                Deletar Pré-inscrição
+              </button>
+            </div>
+          </div>
+
           <mat-card-content class="py-2">
+            <div class="row justify-content-center">
+              <div class="col-sm-12 col-md-11 col-lg-8 col-12">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Número de Pré-incrição</mat-label>
+                  <input matInput formControlName="enrollment" placeholder="Digite o nome do time">
+                  @if(formTeam.controls['enrollment'].errors?.['required']){
+                    <mat-error>Este campo é obrigatório</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+
             <div class="row justify-content-center">
               <div class="col-sm-8 col-md-8 col-lg-6 col-12">
                 <mat-form-field class="w-100" appearance="outline">
@@ -76,41 +133,42 @@
               </div>
             </div>
 
-            <div class="row justify-content-center">
-              <div class="col-sm-4 col-md-4 col-lg-3 col-12">
-                <mat-form-field class="w-100" appearance="outline">
-                  <mat-label>Categoria</mat-label>
-                  <mat-select formControlName="category">
-                    @for (category of listCategoriesSelect; track category) {
-                      <mat-option value="{{category.value}}">{{category.label}}</mat-option>
+            @if(modeEditing){
+              <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-4 col-lg-3 col-12">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="category">
+                      @for (category of listCategoriesSelect; track category) {
+                        <mat-option value="{{category.value}}">{{category.label}}</mat-option>
+                      }
+                    </mat-select>
+                    @if(formTeam.controls['category'].errors?.['required']){
+                      <mat-error>Este campo é obrigatório para adicionar uma Categoria</mat-error>
                     }
-                  </mat-select>
-                  @if(formTeam.controls['category'].errors?.['required']){
-                    <mat-error>Este campo é obrigatório para adicionar uma Categoria</mat-error>
-                  }
-                </mat-form-field>
-              </div>
-              <div class="col-sm-4 col-md-4 col-lg-3 col-12">
-                <mat-form-field class="w-100" appearance="outline">
-                  <mat-label>Naipe</mat-label>
-                  <mat-select formControlName="naipe">
-                    @for (naipe of listNaipesSelect; track naipe) {
-                      <mat-option value="{{naipe.value}}">{{naipe.label}}</mat-option>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-3 col-12">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Naipe</mat-label>
+                    <mat-select formControlName="naipe">
+                      @for (naipe of listNaipesSelect; track naipe) {
+                        <mat-option value="{{naipe.value}}">{{naipe.label}}</mat-option>
+                      }
+                    </mat-select>
+                    @if(formTeam.controls['naipe'].errors?.['required']){
+                      <mat-error>Este campo é obrigatório para adicionar uma Categoria</mat-error>
                     }
-                  </mat-select>
-                  @if(formTeam.controls['naipe'].errors?.['required']){
-                    <mat-error>Este campo é obrigatório para adicionar uma Categoria</mat-error>
-                  }
-                </mat-form-field>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2 col-12">
+                  <button (click)="addNewCategory()" type="button" class="w-100 h-button" color="primary" mat-raised-button>
+                    <mat-icon class="m0">add</mat-icon>
+                    Adicionar Categoria
+                  </button>
+                </div>
               </div>
-              <div class="col-sm-4 col-md-3 col-lg-2 col-12">
-                <button (click)="addNewCategory()" type="button" class="w-100 h-button" color="primary" mat-raised-button>
-                  <mat-icon class="m0">add</mat-icon>
-                  Adicionar Categoria
-                </button>
-              </div>
-            </div>
-
+            }
             <div class="row justify-content-center">
               <div class="col-sm-12 col-md-11 col-lg-8 col-12">
                 <mat-list class="container-list" role="list">
@@ -125,9 +183,11 @@
                             <span class="naipe">{{labelNaipe(category.naipe)}}</span>
                           </div>
 
-                          <button (click)="deleteCategory($index)" mat-icon-button type="button">
-                            <mat-icon class="icon">delete</mat-icon>
-                          </button>
+                          @if(modeEditing){
+                            <button (click)="deleteCategory($index)" mat-icon-button type="button">
+                              <mat-icon class="icon">delete</mat-icon>
+                            </button>
+                          }
                         </div>
                       </mat-list-item>
                     }
@@ -135,62 +195,24 @@
               </div>
             </div>
 
-            <div class="row justify-content-center">
-              <div class="col-sm-12 col-md-8 col-lg-7 col-12">
-                <button-loading
-                  [loading]="loadingSubmitForm"
-                  [type]="'submit'"
-                  [color]="'primary'"
-                  [disabled]="formTeam.invalid"
-                  [description]="'Confirma pré-inscrição'"
-                  [iconNext]="'arrow_forward'"
-                  [class]="'w-100'">
-                </button-loading>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    } @else if(messageSuccess == true){
-      <div class="row justify-content-center">
-        <div class="col-sm-12 col-md-11 col-lg-8 col-12">
-          <mat-card class="w-100">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image">
-                <img src="../../../assets/images/logo.png" width="35" alt="">
-              </div>
-              <mat-card-title>Pré-inscrição concluída</mat-card-title>
-              <mat-card-subtitle>COPA ACE VOLEIBOL 2k26</mat-card-subtitle>
-            </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content class="my-2">
-              <div class="card color-card">
-                <div class="row justify-content-center">
-                  <div class="col-12 p-5 d-flex justify-content-center">
-                    <mat-icon class="scale-icon color-success">check_circle_outline</mat-icon>
-                  </div>
-                  <p class="text-center fs-3 color-primary">Pré-inscrição foi finalizada com sucesso</p>
-                  <p class="text-center fs-4 color-primary">Número da pré-inscrição: {{registration.enrollment}}</p>
-                </div>
-              </div>
-
-              <div class="row justify-content-center py-2">
-                <div class="col-sm-12 col-md-11 col-lg-8 col-12">
+            @if(modeEditing){
+              <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-8 col-lg-7 col-12">
                   <button-loading
                     [loading]="loadingSubmitForm"
-                    [type]="'button'"
+                    [type]="'submit'"
                     [color]="'primary'"
-                    [description]="'Ir para tela de acompanhamento'"
+                    [disabled]="formTeam.invalid"
+                    [description]="'Salvar alterações da pré-inscrição'"
                     [iconNext]="'arrow_forward'"
-                    [class]="'w-100'"
-                    (click)="redirectPageFollowUp(registration.enrollment)">
+                    [class]="'w-100'">
                   </button-loading>
                 </div>
               </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
+            }
+          </mat-card-content>
+        </mat-card>
       </div>
-    }
-  </form>
-</main>
+    </form>
+  </main>
+}
