@@ -1,0 +1,22 @@
+.container-list{
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+
+  .title{
+    font-size: large;
+    font-weight: 700;
+  }
+  .category{
+    font-weight: 600;
+  }
+
+  .naipe{
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.38);
+  }
+
+  .icon{
+    color: red;
+  }
+}
