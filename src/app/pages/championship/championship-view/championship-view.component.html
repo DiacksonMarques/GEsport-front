@@ -11,11 +11,30 @@
 
       <mat-card-content class="py-4">
         <div class="col-12">
-          <table-paginator
+          <table-expandable
             [tableColumns]="displayedColumnsTableSales"
             [dataSourceData]="championship"
             [spinnerLoader]="loadTable"
-          ></table-paginator>
+            [template]="greet"
+          >
+            <ng-template #greet let-team="team">
+              <mat-list class="container-list w-100" role="list">
+                <div class="title" mat-subheader>Categorias selecionadas</div>
+                  @for (category of team.categories; track category;) {
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                      <mat-icon matListItemIcon>sports_volleyball</mat-icon>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex flex-column">
+                          <span class="category">{{labelCategory(category.category)}}</span>
+                          <span class="naipe">{{labelNaipe(category.naipe)}}</span>
+                        </div>
+                      </div>
+                    </mat-list-item>
+                  }
+              </mat-list>
+            </ng-template>
+          </table-expandable>
         </div>
       </mat-card-content>
     </mat-card>

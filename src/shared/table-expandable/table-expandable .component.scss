@@ -1,0 +1,27 @@
+.example-container{
+  overflow: auto;
+  background-color: #fff;
+}
+table {
+  width: 100%;
+}
+::ng-deep .mat-sort-header-container {
+  justify-content: center;
+}
+
+.row-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+tr.detail-row-expand {
+  height: 0;
+}
+
+tr.row-expand:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.row-expand:not(.example-expanded-row):active {
+  background: #efefef;
+}
