@@ -3,14 +3,15 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { TableComponent } from '../../../../shared/table/table.component';
 import { Form } from '../../../core/modules/input.module';
 import { ColumnsTable } from '../../../../shared/table/Table';
 import { Championship } from '../../../core/models/Championship';
 import { NgxMaskService } from 'ngx-mask';
 import { TableExpandableComponent } from '../../../../shared/table-expandable/table-expandable .component';
 import { MatListModule } from '@angular/material/list';
-import { JsonPipe } from '@angular/common';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-championship-view',
@@ -22,6 +23,7 @@ import { JsonPipe } from '@angular/common';
     MatDialogModule,
     Form,
     MatListModule,
+    MatButtonToggleModule
   ],
   templateUrl: './championship-view.component.html',
   styleUrl: './championship-view.component.scss'
@@ -52,6 +54,9 @@ export class ChampionshipViewComponent {
     {value: "SUB14", label:"Sub-14"},
   ];
 
+  filterCategory!: FormControl;
+  filterNaipe!: FormControl;
+
   constructor(
     private championshipService: ChampionshipService,
     private ngxMaskService: NgxMaskService
@@ -66,12 +71,52 @@ export class ChampionshipViewComponent {
   }
 
   private loadPage(): void{
+    this.filterCategory = new FormControl('TODOS');
+    this.filterNaipe = new FormControl(['FEMININO','MASCULINO']);
+    this.changeFilter();
+
     this.loadTable = true;
     this.championshipService.allTeams().subscribe(value => {
       this.championship = value.value;
       this.championshipCopy = value.value;
       this.loadTable = false;
     }, () => this.loadTable = false);
+  }
+
+  private changeFilter(): void{
+    this.filterCategory.valueChanges.subscribe(_ =>{
+      this.filterChampionship();
+    });
+
+    this.filterNaipe.valueChanges.subscribe(_ =>{
+      this.filterChampionship();
+    });
+  }
+
+  private filterChampionship(): void{
+    const filterNaipe = this.naipeSelect();
+    const filterCategory = this.filterCategory.value;
+    const championshipFilter:Championship[] = [];
+
+    this.championshipCopy.forEach(value => {
+      if(value.categories.some(value => value.category == filterCategory && (value.naipe == filterNaipe || filterNaipe == 'AMB'))){
+        championshipFilter.push(value);
+      } else if(filterCategory == "TODOS" && (value.categories.some(value => value.naipe == filterNaipe || filterNaipe == 'AMB'))){
+        championshipFilter.push(value);
+      }
+    });
+
+    this.championship = championshipFilter;
+  }
+
+  private naipeSelect(): string{
+    const filterNaipe = this.filterNaipe.value;
+
+    if(filterNaipe.length == 1){
+      return filterNaipe[0];
+    }
+
+    return 'AMB';
   }
 
   private returnComplementTeam(value: Championship): string{

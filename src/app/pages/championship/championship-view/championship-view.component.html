@@ -10,6 +10,20 @@
       </mat-card-header>
 
       <mat-card-content class="py-4">
+        <section class="col-12 py-4">
+          <mat-button-toggle-group [formControl]="filterCategory" aria-label="Categorias">
+            <mat-button-toggle value="TODOS">TODOS</mat-button-toggle>
+            <mat-button-toggle value="SUB14">SUB-14</mat-button-toggle>
+            <mat-button-toggle value="SUB17">SUB-17</mat-button-toggle>
+            <mat-button-toggle value="SUB19">SUB-19</mat-button-toggle>
+            <mat-button-toggle value="ADL">ADULTO</mat-button-toggle>
+          </mat-button-toggle-group>
+
+          <mat-button-toggle-group [formControl]="filterNaipe" class="ms-4" aria-label="Naipe" multiple>
+            <mat-button-toggle value="FEMININO">FEMININO</mat-button-toggle>
+            <mat-button-toggle value="MASCULINO">MASCULINO</mat-button-toggle>
+          </mat-button-toggle-group>
+        </section>
         <div class="col-12">
           <table-expandable
             [tableColumns]="displayedColumnsTableSales"
